@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <logger name="springfox.documentation" level="WARN"/>
+  <logger name="org.mongodb" level="DEBUG"/>
+  <logger name="org.springframework" level="INFO" />
+  <appender name="FILE"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Append>true</Append>
+    <File>/tmp/contract.log</File>
+    <encoder>
+      <pattern>%d{ABSOLUTE} %5p %c - [%X{IP_ADDRESS}] [%X{SESSION_ID}]
+        [%X{LOGGED_IN_USER}] %m%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>/tmp/contract.log.%d{yyyy-MM-dd}
+      </fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+      <pattern>%d{ABSOLUTE} %5p %c - [%X{IP_ADDRESS}] [%X{SESSION_ID}]
+        [%X{LOGGED_IN_USER}] %m%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+  </appender>
+
+  <root level="DEBUG">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>
