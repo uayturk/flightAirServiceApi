@@ -13,4 +13,6 @@ public interface AirportService {
 
   List<BaseObject> getAirportsByCode(String code);
 
+  List<BaseObject> getAirportsByCityCode(String cityCode);
+
 }

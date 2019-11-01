@@ -178,6 +178,12 @@ public class AirportServiceImpl implements AirportService {
     return result;
   }
 
+
+  /**
+   *
+   * @param code valid fs (FlightStats code) for airport.
+   * @return airports for given fs code.
+   */
   public List<BaseObject> getAirportsByCode(String code){
     log.info("trying to get airports for given fs code {}.",code);
     Query query = new Query(where("fs").is(code));
@@ -211,5 +217,44 @@ public class AirportServiceImpl implements AirportService {
     log.info("FINALLY RESULT AIRPORTS BY GIVEN FS CODE: {}", result);
     return result;
   }
+
+
+  public List<BaseObject> getAirportsByCityCode(String cityCode){
+    log.info("trying to get airports for given city code {}.",cityCode);
+    Query query = new Query(where("cityCode").is(cityCode));
+    query.fields().include("fs")
+        .include("iata")
+        .include("icao")
+        .include("faa")
+        .include("name")
+        .include("street1")
+        .include("city")
+        .include("cityCode")
+        .include("stateCode")
+        .include("postalCode")
+        .include("countryCode")
+        .include("regionName")
+        .include("timeZoneRegionName")
+        .include("weatherZone")
+        .include("localTime")
+        .include("utcOffsetHours")
+        .include("latitude")
+        .include("longitude")
+        .include("elevationFeet")
+        .include("elevationFeet")
+        .include("classification")
+        .include("active")
+        .include("weatherUrl")
+        .include("delayIndexUrl");
+    log.info("query to fetch airports for given city codes objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN CITY CODE: {}", result);
+    return result;
+  }
+
+
+
+
 
 }

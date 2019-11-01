@@ -51,7 +51,7 @@ public class AirportFunctionalityController {
   /**
    *
    * @param code valid fs code for airports.
-   * @return
+   * @return valid airports for given fs codes.
    */
   @RequestMapping(value = "/getAirportsByCode", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
@@ -61,6 +61,22 @@ public class AirportFunctionalityController {
   public List<BaseObject> getAirportsByCode(@RequestParam(required = true) String code) {
     return airportService.getAirportsByCode(code);
   }
+
+
+  /**
+   *
+   * @param cityCode valid city code for cities.
+   * @return airports for given city code.
+   */
+  @RequestMapping(value = "/getAirportsByCityCode", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByCityCode.\n",
+      notes = "getAirportsByCityCode is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByCityCode(@RequestParam(required = true) String cityCode) {
+    return airportService.getAirportsByCityCode(cityCode);
+  }
+
 
 
 }
