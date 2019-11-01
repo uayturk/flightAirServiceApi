@@ -42,10 +42,24 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getActiveOrDeactivateAirports", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getActiveOrDeactivateAirports.\n",
-      notes = "getActiveOrDeactivateAirports is loads Json object values from MongoDb.\n "
+      notes = "getActiveOrDeactivateAirports is loads Active or Deactive airports values from MongoDb.\n "
   )
   public List<BaseObject> getActiveOrDeactivateAirports(@RequestParam(required = true) Boolean active) {
     return airportService.getActiveOrDeactivateAirports(active);
+  }
+
+  /**
+   *
+   * @param code valid fs code for airports.
+   * @return
+   */
+  @RequestMapping(value = "/getAirportsByCode", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByCode.\n",
+      notes = "getAirportsByCode is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByCode(@RequestParam(required = true) String code) {
+    return airportService.getAirportsByCode(code);
   }
 
 

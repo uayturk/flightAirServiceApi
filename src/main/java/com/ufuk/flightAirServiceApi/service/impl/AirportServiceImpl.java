@@ -36,6 +36,12 @@ public class AirportServiceImpl implements AirportService {
   AirportServiceImpl(MongoTemplate mongoTemplate) {
     this.mongoTemplate = mongoTemplate;
   }
+
+  /**
+   * readJsonFromUrlSaveMongoDb method reads JSOn from server and afterwards save it to the mongoDB.
+   * @throws IOException valid exception for method.
+   * @throws JSONException
+   */
    //                     msec sec min  (12 hours delay)
   //@Scheduled(fixedRate = 1000*60*720)
   public void readJsonFromUrlSaveMongoDb() throws IOException, JSONException {
@@ -100,20 +106,27 @@ public class AirportServiceImpl implements AirportService {
     }
   }
 
-  @Override
+
+  /**
+   * getActiveOrDeactivateAirports gets active or deactive airports.
+   * @param active valid boolean value. (true or false)
+   * @return active or deactive airports.
+   */
   public List<BaseObject> getActiveOrDeactivateAirports(Boolean active) {
     log.info("trying to load active airports.");
     Query query;
     if(active.equals(true)) {
-      log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaa.");
       query = new Query(where("active").is(true));
       query.fields().include("fs")
           .include("iata")
           .include("icao")
           .include("faa")
           .include("name")
+          .include("street1")
           .include("city")
+          .include("cityCode")
           .include("stateCode")
+          .include("postalCode")
           .include("countryCode")
           .include("regionName")
           .include("timeZoneRegionName")
@@ -130,15 +143,17 @@ public class AirportServiceImpl implements AirportService {
           .include("delayIndexUrl");
       log.info("query to fetch active airports objects: {}", query);
     }else {
-      log.info("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.");
       query = new Query(where("active").is(false));
       query.fields().include("fs")
           .include("iata")
           .include("icao")
           .include("faa")
           .include("name")
+          .include("street1")
           .include("city")
+          .include("cityCode")
           .include("stateCode")
+          .include("postalCode")
           .include("countryCode")
           .include("regionName")
           .include("timeZoneRegionName")
@@ -160,6 +175,40 @@ public class AirportServiceImpl implements AirportService {
     log.info("successfully fetched result size: {}", result.size());
     log.info("FINALLY RESULT: {}", result);
 
+    return result;
+  }
+
+  public List<BaseObject> getAirportsByCode(String code){
+    log.info("trying to get airports for given fs code {}.",code);
+    Query query = new Query(where("fs").is(code));
+    query.fields().include("fs")
+        .include("iata")
+        .include("icao")
+        .include("faa")
+        .include("name")
+        .include("street1")
+        .include("city")
+        .include("cityCode")
+        .include("stateCode")
+        .include("postalCode")
+        .include("countryCode")
+        .include("regionName")
+        .include("timeZoneRegionName")
+        .include("weatherZone")
+        .include("localTime")
+        .include("utcOffsetHours")
+        .include("latitude")
+        .include("longitude")
+        .include("elevationFeet")
+        .include("elevationFeet")
+        .include("classification")
+        .include("active")
+        .include("weatherUrl")
+        .include("delayIndexUrl");
+    log.info("query to fetch airports for given codes objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN FS CODE: {}", result);
     return result;
   }
 

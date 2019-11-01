@@ -25,11 +25,20 @@ public class BaseObject {
   @SerializedName(value = "name")
   private String name;
 
+  @SerializedName(value = "street1")
+  private String street1;
+
   @SerializedName(value = "city")
   private String city;
 
+  @SerializedName(value = "cityCode")
+  private String cityCode;
+
   @SerializedName(value = "stateCode")
   private String stateCode;
+
+  @SerializedName(value = "postalCode")
+  private String postalCode;
 
   @SerializedName(value = "countryCode")
   private String countryCode;

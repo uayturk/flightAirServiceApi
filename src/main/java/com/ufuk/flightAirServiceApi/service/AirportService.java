@@ -11,4 +11,6 @@ public interface AirportService {
 
   List<BaseObject> getActiveOrDeactivateAirports(Boolean active);
 
+  List<BaseObject> getAirportsByCode(String code);
+
 }
