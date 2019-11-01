@@ -106,4 +106,26 @@ public class AirportFunctionalityController {
   }
 
 
+  @RequestMapping(value = "/getAirportsByCity", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByCity.\n",
+      notes = "getAirportsByCity is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByCity(@RequestParam(required = true) String city) {
+    return airportService.getAirportsByCity(city);
+  }
+
+  /**
+   *
+   * @param country valid country name.
+   * @return airports for given country name.
+   */
+  @RequestMapping(value = "/getAirportsByCountryName", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByCountryName.\n",
+      notes = "getAirportsByCity is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByCountryName(@RequestParam(required = true) String country) {
+    return airportService.getAirportsByCountryName(country);
+  }
 }

@@ -43,6 +43,9 @@ public class BaseObject {
   @SerializedName(value = "countryCode")
   private String countryCode;
 
+  @SerializedName(value = "countryName")
+  private String countryName;
+
   @SerializedName(value = "regionName")
   private String regionName;
 

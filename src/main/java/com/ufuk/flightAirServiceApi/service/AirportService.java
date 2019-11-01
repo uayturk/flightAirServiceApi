@@ -19,4 +19,8 @@ public interface AirportService {
 
   List<BaseObject> getAirportsByIcaoCode(String icaoCode);
 
+  List<BaseObject> getAirportsByCity(String city);
+
+  List<BaseObject> getAirportsByCountryName(String country);
+
 }

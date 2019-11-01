@@ -70,7 +70,7 @@ public class AirportServiceImpl implements AirportService {
 
 
     /**
-     * In here JSON formant comes like:
+     * Here is a JSON formant comes like:
      * {
      *   "airports": [
      *     {
@@ -199,5 +199,39 @@ public class AirportServiceImpl implements AirportService {
     return result;
   }
 
+
+  /**
+   *
+   * @param city valid city name.
+   * @return airports for given city name.
+   */
+  public List<BaseObject> getAirportsByCity(String city){
+    log.info("trying to get airports for given city {}.",city);
+
+    Query query = new Query(where("city").is(city));
+
+    log.info("query to fetch airports for given city objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN CITY NAME: {}", result);
+    return result;
+  }
+
+  /**
+   *
+   * @param country valid country name.
+   * @return airports for given country name.
+   */
+  public List<BaseObject> getAirportsByCountryName(String country){
+    log.info("trying to get airports for given city {}.",country);
+
+    Query query = new Query(where("countryName").is(country));
+
+    log.info("query to fetch airports for given country objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN COUNTRY NAME: {}", result);
+    return result;
+  }
 
 }
