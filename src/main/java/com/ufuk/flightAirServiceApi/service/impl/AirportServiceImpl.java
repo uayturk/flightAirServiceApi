@@ -117,57 +117,9 @@ public class AirportServiceImpl implements AirportService {
     Query query;
     if(active.equals(true)) {
       query = new Query(where("active").is(true));
-      query.fields().include("fs")
-          .include("iata")
-          .include("icao")
-          .include("faa")
-          .include("name")
-          .include("street1")
-          .include("city")
-          .include("cityCode")
-          .include("stateCode")
-          .include("postalCode")
-          .include("countryCode")
-          .include("regionName")
-          .include("timeZoneRegionName")
-          .include("weatherZone")
-          .include("localTime")
-          .include("utcOffsetHours")
-          .include("latitude")
-          .include("longitude")
-          .include("elevationFeet")
-          .include("elevationFeet")
-          .include("classification")
-          .include("active")
-          .include("weatherUrl")
-          .include("delayIndexUrl");
       log.info("query to fetch active airports objects: {}", query);
     }else {
       query = new Query(where("active").is(false));
-      query.fields().include("fs")
-          .include("iata")
-          .include("icao")
-          .include("faa")
-          .include("name")
-          .include("street1")
-          .include("city")
-          .include("cityCode")
-          .include("stateCode")
-          .include("postalCode")
-          .include("countryCode")
-          .include("regionName")
-          .include("timeZoneRegionName")
-          .include("weatherZone")
-          .include("localTime")
-          .include("utcOffsetHours")
-          .include("latitude")
-          .include("longitude")
-          .include("elevationFeet")
-          .include("elevationFeet")
-          .include("classification")
-          .include("active")
-          .include("weatherUrl")
-          .include("delayIndexUrl");
       log.info("query to fetch deactive airports objects: {}", query);
     }
 
@@ -187,30 +139,7 @@ public class AirportServiceImpl implements AirportService {
   public List<BaseObject> getAirportsByCode(String code){
     log.info("trying to get airports for given fs code {}.",code);
     Query query = new Query(where("fs").is(code));
-    query.fields().include("fs")
-        .include("iata")
-        .include("icao")
-        .include("faa")
-        .include("name")
-        .include("street1")
-        .include("city")
-        .include("cityCode")
-        .include("stateCode")
-        .include("postalCode")
-        .include("countryCode")
-        .include("regionName")
-        .include("timeZoneRegionName")
-        .include("weatherZone")
-        .include("localTime")
-        .include("utcOffsetHours")
-        .include("latitude")
-        .include("longitude")
-        .include("elevationFeet")
-        .include("elevationFeet")
-        .include("classification")
-        .include("active")
-        .include("weatherUrl")
-        .include("delayIndexUrl");
+
     log.info("query to fetch airports for given codes objects: {}", query);
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
     log.info("successfully fetched result size: {}", result.size());
@@ -218,34 +147,16 @@ public class AirportServiceImpl implements AirportService {
     return result;
   }
 
-
+  /**
+   *
+   * @param cityCode valid city code for airpots.
+   * @return airports for given city code.
+   */
   public List<BaseObject> getAirportsByCityCode(String cityCode){
     log.info("trying to get airports for given city code {}.",cityCode);
+
     Query query = new Query(where("cityCode").is(cityCode));
-    query.fields().include("fs")
-        .include("iata")
-        .include("icao")
-        .include("faa")
-        .include("name")
-        .include("street1")
-        .include("city")
-        .include("cityCode")
-        .include("stateCode")
-        .include("postalCode")
-        .include("countryCode")
-        .include("regionName")
-        .include("timeZoneRegionName")
-        .include("weatherZone")
-        .include("localTime")
-        .include("utcOffsetHours")
-        .include("latitude")
-        .include("longitude")
-        .include("elevationFeet")
-        .include("elevationFeet")
-        .include("classification")
-        .include("active")
-        .include("weatherUrl")
-        .include("delayIndexUrl");
+
     log.info("query to fetch airports for given city codes objects: {}", query);
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
     log.info("successfully fetched result size: {}", result.size());
@@ -254,7 +165,39 @@ public class AirportServiceImpl implements AirportService {
   }
 
 
+  /**
+   *
+   * @param iataCode valid iata code.
+   * @return airports for given iata.
+   */
+  public List<BaseObject> getAirportsByIataCode(String iataCode){
+    log.info("trying to get airports for given city code {}.",iataCode);
 
+    Query query = new Query(where("iata").is(iataCode));
+
+    log.info("query to fetch airports for given iata codes objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN IATA CODE: {}", result);
+    return result;
+  }
+
+  /**
+   *
+   * @param icaoCode valid icao code.
+   * @return airports for given icao codes.
+   */
+  public List<BaseObject> getAirportsByIcaoCode(String icaoCode){
+    log.info("trying to get airports for given icao code {}.",icaoCode);
+
+    Query query = new Query(where("icao").is(icaoCode));
+
+    log.info("query to fetch airports for given icao codes objects: {}", query);
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT AIRPORTS BY GIVEN ICAO CODE: {}", result);
+    return result;
+  }
 
 
 }

@@ -77,6 +77,33 @@ public class AirportFunctionalityController {
     return airportService.getAirportsByCityCode(cityCode);
   }
 
+  /**
+   *
+   * @param iataCode valid iata code for airports.
+   * @return airports for given iata.
+   */
+  @RequestMapping(value = "/getAirportsByIataCode", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByIataCode.\n",
+      notes = "getAirportsByIataCode is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByIataCode(@RequestParam(required = true) String iataCode) {
+    return airportService.getAirportsByIataCode(iataCode);
+  }
+
+  /**
+   *
+   * @param icaoCode valid icao code.
+   * @return airports for given icao codes.
+   */
+  @RequestMapping(value = "/getAirportsByIcaoCode", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getAirportsByIcaoCode.\n",
+      notes = "getAirportsByIcaoCode is loads airports Json object values from MongoDb.\n "
+  )
+  public List<BaseObject> getAirportsByIcaoCode(@RequestParam(required = true) String icaoCode) {
+    return airportService.getAirportsByIcaoCode(icaoCode);
+  }
 
 
 }
