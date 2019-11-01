@@ -1,8 +1,11 @@
 package com.ufuk.flightAirServiceApi.service.impl;
 
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 import com.google.gson.Gson;
 import com.ufuk.flightAirServiceApi.beans.AirportCollection;
+import com.ufuk.flightAirServiceApi.model.airportModel.Airports;
 import com.ufuk.flightAirServiceApi.model.airportModel.BaseObject;
 import com.ufuk.flightAirServiceApi.service.AirportService;
 import java.io.BufferedReader;
@@ -17,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +52,7 @@ public class AirportServiceImpl implements AirportService {
     BufferedReader in = new BufferedReader(
         new InputStreamReader(con.getInputStream()));*/
 
-    FileReader fr = new FileReader("/home/ufuk/Masaüstü/test");
+    FileReader fr = new FileReader("/home/ufuk/Masaüstü/test2");
     BufferedReader in = new BufferedReader(fr);
 
     String inputLine;
@@ -59,36 +63,104 @@ public class AirportServiceImpl implements AirportService {
     in.close();
 
 
+    /**
+     * In here JSON formant comes like:
+     * {
+     *   "airports": [
+     *     {
+     *       "fs": "00M",
+     *       .
+     *       .
+     *       .
+     *
+     *     },
+     *     {
+     *       "fs": "00N",
+     *       .
+     *       .
+     *       .
+     *     },
+     *   ]
+     * }
+     */
+
     Gson gson = new Gson();
-    List<Object> baseObjects = gson.fromJson(response.toString(), List.class);//Converting JSON to Java Object. From response.toString() (JSON) to List.class(JAVA OBJECT)
-    log.info("AAAAAAAAAAAAAAAAA:{}" + baseObjects);
-    //Object baseObjects = gson.fromJson(response.toString(),Object.class);
-    for (Object o : baseObjects) {
+    Airports baseObjects = gson.fromJson(response.toString(), Airports.class);  //Converting JSON to Java Object. From response.toString() (JSON) to Airport.class(JAVA OBJECT)
+
+    for (BaseObject o : baseObjects.getBaseObjects()) {
       String jsonObject = gson.toJson(o); //Converting our Object type to JSON type.
-      BaseObject baseObject = gson.fromJson(jsonObject, BaseObject.class);//Converting our JSON type to baseobject type.In here,our datas are filled in Baseobject fields.
-      //From jsonObject(JSON) to BaseObject.class(BaseObject type)
+      BaseObject baseObject = gson.fromJson(jsonObject, BaseObject.class);//Converting our JSON type to baseobject type.In here,our datas are filled in Baseobject fields.From jsonObject(JSON) to BaseObject.class(BaseObject type)
+                                                                           //This code's shortly explain is: It is save baseobject to database true format.
       log.info("trying to save airport object: {}", baseObject);
       mongoTemplate.save(baseObject, AirportCollection.OBJECTS.toString());
-      log.info("successfully saved airport object with fs code{}", baseObject.getFs()); //fs code means ICAO code and it is unique for airports.
+      log.info("successfully saved airport object with fs code{}", o.getFs()); //fs code means ICAO code and it is unique for airports.
 
       System.out.println(baseObject);
 
     }
   }
 
-  /*public static void main(String[] args) throws IOException {
-    FileReader fr = new FileReader("/home/ufuk/Masaüstü/test");
-    BufferedReader in = new BufferedReader(fr);
-
-    String inputLine;
-    StringBuffer response = new StringBuffer();
-    while ((inputLine = in.readLine()) != null) {
-      response.append(inputLine);
+  @Override
+  public List<BaseObject> getActiveOrDeactivateAirports(Boolean active) {
+    log.info("trying to load active airports.");
+    Query query;
+    if(active.equals(true)) {
+      log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaa.");
+      query = new Query(where("active").is(true));
+      query.fields().include("fs")
+          .include("iata")
+          .include("icao")
+          .include("faa")
+          .include("name")
+          .include("city")
+          .include("stateCode")
+          .include("countryCode")
+          .include("regionName")
+          .include("timeZoneRegionName")
+          .include("weatherZone")
+          .include("localTime")
+          .include("utcOffsetHours")
+          .include("latitude")
+          .include("longitude")
+          .include("elevationFeet")
+          .include("elevationFeet")
+          .include("classification")
+          .include("active")
+          .include("weatherUrl")
+          .include("delayIndexUrl");
+      log.info("query to fetch active airports objects: {}", query);
+    }else {
+      log.info("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.");
+      query = new Query(where("active").is(false));
+      query.fields().include("fs")
+          .include("iata")
+          .include("icao")
+          .include("faa")
+          .include("name")
+          .include("city")
+          .include("stateCode")
+          .include("countryCode")
+          .include("regionName")
+          .include("timeZoneRegionName")
+          .include("weatherZone")
+          .include("localTime")
+          .include("utcOffsetHours")
+          .include("latitude")
+          .include("longitude")
+          .include("elevationFeet")
+          .include("elevationFeet")
+          .include("classification")
+          .include("active")
+          .include("weatherUrl")
+          .include("delayIndexUrl");
+      log.info("query to fetch deactive airports objects: {}", query);
     }
-    in.close();
 
-    String modifiedServerResponse = response.toString();
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched result size: {}", result.size());
+    log.info("FINALLY RESULT: {}", result);
 
-    log.info("AAAAAAAAAAA:" + modifiedServerResponse);
-  }*/
+    return result;
+  }
+
 }
