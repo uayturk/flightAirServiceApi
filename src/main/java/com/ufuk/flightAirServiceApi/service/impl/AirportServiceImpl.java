@@ -171,7 +171,7 @@ public class AirportServiceImpl implements AirportService {
    * @return airports for given iata.
    */
   public List<BaseObject> getAirportsByIataCode(String iataCode){
-    log.info("trying to get airports for given city code {}.",iataCode);
+    log.info("trying to get airports for given iata code {}.",iataCode);
 
     Query query = new Query(where("iata").is(iataCode));
 
