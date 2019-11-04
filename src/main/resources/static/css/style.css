@@ -1,0 +1,13 @@
+body {
+  font-family: arial, sans-serif;
+  background: url("../img/background2.jpg") no-repeat #0e4f79;
+  background-size: cover;
+  overflow-x: hidden;
+  height: 170px;
+
+}
+
+mark.yellow{
+  color:yellow;
+  background: none;
+}

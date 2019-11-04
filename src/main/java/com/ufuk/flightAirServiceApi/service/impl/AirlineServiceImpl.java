@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AirlineServiceImpl implements AirlineService {
 
-  //https://api.flightstats.com/flex/airlines/rest/v1/json/all?appId=6354af1a&appKey=+131acf5588626fec70d69a7b5ea59583&details=true&ormat=json
   private final MongoTemplate mongoTemplate;
 
   public AirlineServiceImpl(MongoTemplate mongoTemplate) {
