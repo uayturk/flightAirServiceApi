@@ -9,7 +9,7 @@ public interface AirportService {
 
   void readJsonFromUrlSaveMongoDb() throws IOException, JSONException;
 
-  List<BaseObject> getActiveOrDeactivateAirports(Boolean active);
+  List<BaseObject> getActiveOrInactiveAirports(Boolean active);
 
   List<BaseObject> getAirportsByCode(String code);
 
@@ -22,5 +22,8 @@ public interface AirportService {
   List<BaseObject> getAirportsByCity(String city);
 
   List<BaseObject> getAirportsByCountryName(String country);
+
+  List<BaseObject> getActiveOrInactiveAirportsByCountryName(Boolean active,String country);
+
 
 }

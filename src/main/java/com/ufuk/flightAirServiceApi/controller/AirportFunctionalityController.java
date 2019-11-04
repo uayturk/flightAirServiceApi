@@ -37,15 +37,15 @@ public class AirportFunctionalityController {
 
   /**
    * @param active true/false valid active status.
-   * @return returns active or deactive datas which is read from DB.
+   * @return returns active or inactive datas which is read from DB.
    */
-  @RequestMapping(value = "/getActiveOrDeactivateAirports", method = {RequestMethod.POST}, produces = "application/json")
+  @RequestMapping(value = "/getActiveOrInactiveAirports", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
-  @ApiOperation(value = "Necessary doc is the below for getActiveOrDeactivateAirports.\n",
-      notes = "getActiveOrDeactivateAirports is loads Active or Deactive airports values from MongoDb.\n "
+  @ApiOperation(value = "Necessary doc is the below for getActiveOrInactiveAirports.\n",
+      notes = "getActiveOrInactiveAirports is loads Active or Inactive airports values from MongoDb.\n "
   )
-  public List<BaseObject> getActiveOrDeactivateAirports(@RequestParam(required = true) Boolean active) {
-    return airportService.getActiveOrDeactivateAirports(active);
+  public List<BaseObject> getActiveOrInactiveAirports(@RequestParam(required = true) Boolean active) {
+    return airportService.getActiveOrInactiveAirports(active);
   }
 
   /**
@@ -56,7 +56,7 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getAirportsByCode", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByCode.\n",
-      notes = "getAirportsByCode is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByCode is returns the airports with the given FlightStats code from MongoDb.\n "
   )
   public List<BaseObject> getAirportsByCode(@RequestParam(required = true) String code) {
     return airportService.getAirportsByCode(code);
@@ -71,7 +71,7 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getAirportsByCityCode", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByCityCode.\n",
-      notes = "getAirportsByCityCode is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByCityCode is returns airports that which is have the given city code from MongoDB.\n "
   )
   public List<BaseObject> getAirportsByCityCode(@RequestParam(required = true) String cityCode) {
     return airportService.getAirportsByCityCode(cityCode);
@@ -85,7 +85,7 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getAirportsByIataCode", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByIataCode.\n",
-      notes = "getAirportsByIataCode is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByIataCode is returns the airports with the given Iata code from MongoDb.\n "
   )
   public List<BaseObject> getAirportsByIataCode(@RequestParam(required = true) String iataCode) {
     return airportService.getAirportsByIataCode(iataCode);
@@ -99,17 +99,21 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getAirportsByIcaoCode", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByIcaoCode.\n",
-      notes = "getAirportsByIcaoCode is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByIcaoCode is returns airports which is have the given ICAO code from MongoDB.\n "
   )
   public List<BaseObject> getAirportsByIcaoCode(@RequestParam(required = true) String icaoCode) {
     return airportService.getAirportsByIcaoCode(icaoCode);
   }
 
-
+  /**
+   *
+   * @param city valid city names.
+   * @return airports for given city name.
+   */
   @RequestMapping(value = "/getAirportsByCity", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByCity.\n",
-      notes = "getAirportsByCity is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByCity is returns airports that which is have the given city name from MongoDB.\n "
   )
   public List<BaseObject> getAirportsByCity(@RequestParam(required = true) String city) {
     return airportService.getAirportsByCity(city);
@@ -123,9 +127,21 @@ public class AirportFunctionalityController {
   @RequestMapping(value = "/getAirportsByCountryName", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getAirportsByCountryName.\n",
-      notes = "getAirportsByCity is loads airports Json object values from MongoDb.\n "
+      notes = "getAirportsByCity is returns airports which is have the given country name from MongoDB.\n "
   )
   public List<BaseObject> getAirportsByCountryName(@RequestParam(required = true) String country) {
     return airportService.getAirportsByCountryName(country);
   }
+
+
+
+  @RequestMapping(value = "/getActiveOrInactiveAirportsByCountryName", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for getActiveOrInactiveAirportsByCountryName.\n",
+      notes = "getActiveOrInactiveAirportsByCountryName returns airports which have the specified country name and activity status from MongoDB.\n "
+  )
+  public List<BaseObject> getActiveOrInactiveAirportsByCountryName(@RequestParam(required = true) Boolean active,@RequestParam(required = true) String country) {
+    return airportService.getActiveOrInactiveAirportsByCountryName(active,country);
+  }
+
 }

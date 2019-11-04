@@ -108,19 +108,19 @@ public class AirportServiceImpl implements AirportService {
 
 
   /**
-   * getActiveOrDeactivateAirports gets active or deactive airports.
+   * getActiveOrInactiveAirports gets active or inactive airports.
    * @param active valid boolean value. (true or false)
-   * @return active or deactive airports.
+   * @return active or inactive airports.
    */
-  public List<BaseObject> getActiveOrDeactivateAirports(Boolean active) {
-    log.info("trying to load active airports.");
+  public List<BaseObject> getActiveOrInactiveAirports(Boolean active) {
+    log.info("trying to load active/inactive airports.");
     Query query;
     if(active.equals(true)) {
       query = new Query(where("active").is(true));
       log.info("query to fetch active airports objects: {}", query);
     }else {
       query = new Query(where("active").is(false));
-      log.info("query to fetch deactive airports objects: {}", query);
+      log.info("query to fetch inactive airports objects: {}", query);
     }
 
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
@@ -231,6 +231,24 @@ public class AirportServiceImpl implements AirportService {
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
     log.info("successfully fetched result size: {}", result.size());
     log.info("FINALLY RESULT AIRPORTS BY GIVEN COUNTRY NAME: {}", result);
+    return result;
+  }
+
+  public List<BaseObject> getActiveOrInactiveAirportsByCountryName(Boolean active,String country){
+    log.info("trying to get active/inactive airports according to specific country.");
+    Query query;
+    if(active.equals(true)) {
+      query = new Query(where("active").is(true).and("countryName").is(country));
+      log.info("query to fetch active airports objects for given country: {}", query);
+    }else {
+      query = new Query(where("active").is(false).and("countryName").is(country));
+      log.info("query to fetch inactive airports objects for given country: {}", query);
+    }
+
+    List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("successfully fetched active/inactive for given country result size: {}", result.size());
+    log.info("FINALLY RESULT: {}", result);
+
     return result;
   }
 
