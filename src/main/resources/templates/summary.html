@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/flag-icon.css" rel="stylesheet" type="text/css">
+    <link href="css/select2.css" rel="stylesheet" type="text/css">
 </head>
 
 <h1>FlightApi</h1>
@@ -268,14 +272,14 @@
         ];
 
         function formatCountry (country) {
+
           if (!country.id) {
             return country.text;
           }
           var $country = $(
               '<span class="flag-icon flag-icon-'+ country.id.toLowerCase() +' flag-icon-squared"></span>' +
               '<span class="flag-text">'+ country.text+"</span>"
-
-          )
+          );
           return $country;
         };
 
@@ -314,16 +318,49 @@
   </script>
 
 
-  {{#summaryActive}}
-  <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+  <!--{{#summaryActive}}-->
+ <!-- <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
     <div style="display: table">
       <div style="display: table-cell; float: left;width: 600px;">
         <h2>{{city}}</h2>
       </div>
     </div>
-  </li>
-  {{/summaryActive}}
+  </li>-->
+  <!--{{/summaryActive}}-->
 
+
+  <!--https://jsfiddle.net/icebob/m7o1Lase/    bu kod dropdown . Airline vs Airport apilere girişte yapılabilir-->
+  <!--https://jsfiddle.net/KyleMit/8uc20bfj/  filtreleyen liste görünüm
+      http://jsfiddle.net/U8T8p/10/           efektli filtreleyen liste
+      http://jsfiddle.net/chrisskinner/xw35kx54/  bu da show more efektli-->
+  {{#summaryChosen}}
+  <div style="width: 265px;float: left;margin-right: 25px;color: #8EBD40; ">
+    <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
+      <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+      <div style="display: table">
+        <div style="display: table-cell; float: left;width: 600px;">
+          <h2>{{city}}</h2>
+        </div>
+      </div>
+      </li>
+    </ul>
+  </div>
+  {{/summaryChosen}}
+
+  <div class="box green">
+    <span class="title">Active Airports List</span>
+    <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
+      {{#summaryActive}}
+      <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+          <div style="display: table-cell; float: left;width: 600px;">
+            <h2>{{city}}</h2>
+          </div>
+        </div>
+      </li>
+      {{/summaryActive}}
+    </ul>
+  </div>
   <p>developed by
     <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
   </p>
