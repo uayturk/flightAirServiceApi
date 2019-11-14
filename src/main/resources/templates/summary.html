@@ -16,7 +16,7 @@
 
 <ul>
 
-
+  <!--For country chose-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
   <select name="country" id="selectCountryId"><option></option></select>
@@ -318,6 +318,25 @@
   </script>
 
 
+
+  <!--For lazy load active airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      size_li = $("#activeAirportsList li").size();
+      x=2;
+      $('#activeAirportsList li:lt('+x+')').show();
+      $('#loadMore').click(function () {
+        x= (x+2 <= size_li) ? x+2 : size_li;  // x+2 means show it two by two. (ikişerli gösterir. 3 olursa 3erli gösterir)
+        $('#activeAirportsList li:lt('+x+')').show(200);
+      });
+      $('#showLess').click(function () {
+        x=(x-2<0) ? 3 : x-2;
+        $('#activeAirportsList li').not(':lt('+x+')').hide(200);
+      });
+    });
+
+  </script>
   <!--{{#summaryActive}}-->
  <!-- <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
     <div style="display: table">
@@ -347,19 +366,31 @@
   </div>
   {{/summaryChosen}}
 
+
   <div class="box green">
     <span class="title">Active Airports List</span>
-    <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
+    <nav>
+    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px; overflow: auto; overflow-x: hidden">
       {{#summaryActive}}
-      <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 280px">
         <div style="display: table">
           <div style="display: table-cell; float: left;width: 600px;">
-            <h2>{{city}}</h2>
+            <h2><label>Airport Name: </label>{{name}}</h2>
+            <h2><label>City: </label>{{city}}</h2>
+            <h2><label>Country: </label>{{countryName}}</h2>
+            <h2><label>Region: </label>{{regionName}}</h2>
+            <h3><label>Airport ICAO: </label>{{icao}}</h3>
+            <h3><label>Airport IATA: </label>{{iata}}</h3>
+            <h3><label>Airport FAA: </label>{{faa}}</h3>
+            <h3><label>Airport FS: </label>{{fs}}</h3>
           </div>
         </div>
       </li>
       {{/summaryActive}}
     </ul>
+    </nav>
+    <div id="loadMore">Load more</div>
+    <div id="showLess">Show less</div>
   </div>
   <p>developed by
     <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>

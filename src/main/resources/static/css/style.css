@@ -131,3 +131,21 @@ mark.yellow{
 .purple { color: #988CC3; }
 
 .gold { color: #D8C86E; }
+
+#activeAirportsList li{
+  display:none;
+}
+#loadMore {
+  color:green;
+  cursor:pointer;
+}
+#loadMore:hover {
+  color:black;
+}
+#showLess {
+  color:red;
+  cursor:pointer;
+}
+#showLess:hover {
+  color:black;
+}
