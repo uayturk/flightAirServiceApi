@@ -335,23 +335,73 @@
         $('#activeAirportsList li').not(':lt('+x+')').hide(200);
       });
     });
-
   </script>
-  <!--{{#summaryActive}}-->
- <!-- <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
-    <div style="display: table">
-      <div style="display: table-cell; float: left;width: 600px;">
-        <h2>{{city}}</h2>
-      </div>
-    </div>
-  </li>-->
-  <!--{{/summaryActive}}-->
 
 
-  <!--https://jsfiddle.net/icebob/m7o1Lase/    bu kod dropdown . Airline vs Airport apilere girişte yapılabilir-->
-  <!--https://jsfiddle.net/KyleMit/8uc20bfj/  filtreleyen liste görünüm
-      http://jsfiddle.net/U8T8p/10/           efektli filtreleyen liste
-      http://jsfiddle.net/chrisskinner/xw35kx54/  bu da show more efektli-->
+  <!--For filtering active airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+    console.log("fgdgdgdgdgddgdg");
+    $("#searchNames").on('change keyup keydown paste cut' ,function(){
+      var val = $(this).val();
+      console.log("GGGGGGGGGGGGGGg",val);
+      $( "ul li div div").each(function(){
+        var $this = $(this);
+        if($this.html().indexOf(val) == -1){
+          $this.fadeOut(300, function() { this.closest('li').remove(); }).slideUp(200); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+        }
+        else {$this.fadeIn().slideDown(200);} //TODO fadeIn içine de eklenmeli filtrelerken silinenler. kullanıcı sildiği zaman yazdıklarını kaybolanlar yeniden belirmeli.
+    });
+    });
+    });
+  </script>
+
+  <!--
+  JsFille denenecek :  http://jsfiddle.net/nunusandio/gLjqnpf7/
+
+  Html kısım:
+  <input type="search" id="searchNames" >
+
+ <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 700px;padding: 20px;">
+ <li style=" list-style: none; background-color: grey; padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
+        <div style="display: table">
+          <div style="display: table-cell; float: left;width: 600px;">
+            <h2><label>Airport Name: </label>GazipasaAirport</h2>
+            <h2><label>City: </label>Antalya</h2>
+          </div>
+        </div>
+      </li>
+ <li style=" list-style: none; background-color: grey; padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
+        <div style="display: table">
+          <div style="display: table-cell; float: left;width: 600px;">
+            <h2><label>Airport Name: </label>EsenBoğa</h2>
+                <h2><label>City: </label>Ankara</h2>
+          </div>
+        </div>
+      </li>
+</ul>
+
+
+JQuery kısım:
+$("#searchNames").on('change keyup keydown paste cut' ,function(){
+var val = $(this).val();
+console.log("GGGGGGGGGGGGGGg",val);
+$( "ul li div div").each(function(){
+	var $this = $(this);
+	if($this.html().indexOf(val) == -1){
+  	console.log("FFFFFFFFFFFFFFFFFFF",this.closest('li')
+);
+	$this.fadeOut(300, function() { this.closest('li').remove(); }).slideUp(200);
+	}
+	else {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAa",this.closest('li'))
+     $this.fadeIn(300, function() { this.closest('li')}).slideDown(200);
+  }
+
+ });
+});
+  -->
   {{#summaryChosen}}
   <div style="width: 265px;float: left;margin-right: 25px;color: #8EBD40; ">
     <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
@@ -369,10 +419,10 @@
 
   <div class="box green">
     <span class="title">Active Airports List</span>
-    <nav>
-    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px; overflow: auto; overflow-x: hidden">
+    <input type="search" id="searchNames" >
+    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 700px;padding: 20px;">
       {{#summaryActive}}
-      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 280px">
+      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
         <div style="display: table">
           <div style="display: table-cell; float: left;width: 600px;">
             <h2><label>Airport Name: </label>{{name}}</h2>
@@ -388,15 +438,15 @@
       </li>
       {{/summaryActive}}
     </ul>
-    </nav>
+
     <div id="loadMore">Load more</div>
     <div id="showLess">Show less</div>
   </div>
-  <p>developed by
-    <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
-  </p>
-</ul>
 
+</ul>
+<p>developed by
+  <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
+</p>
 </body>
 
 

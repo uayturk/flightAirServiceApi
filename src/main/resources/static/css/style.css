@@ -92,7 +92,6 @@ body {
 
 /*-----Combobox css codes end----------*/
 
-
 .flag-text { margin-left: 10px; }
 
 .wordFilter li{
@@ -121,7 +120,6 @@ mark.yellow{
   margin-right: 25px;
 }
 
-
 .orange { color: #F5876E; }
 
 .blue{ color: #61A8DC; }
@@ -135,6 +133,30 @@ mark.yellow{
 #activeAirportsList li{
   display:none;
 }
+
+/*For scroll view for lazy load*/
+#activeAirportsList::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#activeAirportsList::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#activeAirportsList::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+/*End of the scroll view for lazy load*/
+
+
 #loadMore {
   color:green;
   cursor:pointer;
