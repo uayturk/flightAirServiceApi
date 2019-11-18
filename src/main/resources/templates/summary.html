@@ -375,8 +375,12 @@
 
   <div class="box green">
     <span class="title">Active Airports List</span>
-    <input type="search" id="searchNames" >
-    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 700px;padding: 20px;">
+    <!--<input type="search" id="searchNames" >-->
+    <form method="post">
+      <input type="text" class="textbox" id="searchNames" placeholder="Search">
+
+    </form>
+    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
       {{#summaryActive}}
       <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
         <div style="display: table">
@@ -395,12 +399,12 @@
       {{/summaryActive}}
     </ul>
 
-    <div id="loadMore">Load more</div>
+    <div id="loadMore">Show more</div>
     <div id="showLess">Show less</div>
   </div>
 
 </ul>
-<p>developed by
+<p style="position: absolute;top: 900px;left: 1600px;">developed by
   <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
 </p>
 </body>
