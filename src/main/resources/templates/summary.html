@@ -318,11 +318,11 @@
   </script>
 
 
-
   <!--For lazy load active airports-->
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
+      console.log("Active airports lazy load");
       size_li = $("#activeAirportsList li").size();
       x=2;
       $('#activeAirportsList li:lt('+x+')').show();
@@ -345,7 +345,7 @@
     console.log("fgdgdgdgdgddgdg");
     $("#searchNames").on('change keyup keydown paste cut' ,function(){
       var val = $(this).val();
-
+      console.log("fgdgdgdgdgddgdg 111111111111111111111111111111111111");
       $( "ul li").each(function(){
         var $this = $(this)
         if($this.html().indexOf(val) == -1){
@@ -373,11 +373,74 @@
   {{/summaryChosen}}
 
 
-  <div class="box green">
+
+
+  <!--For lazy load inactive airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      size_li_inactive = $("#inactiveAirportsList li").size();
+      console.log("İNNNNNActive airports lazy load");
+      y=2;
+      $('#inactiveAirportsList li:lt('+y+')').show();
+      $('#loadMoreInactive').click(function () {
+        y= (y+2 <= size_li_inactive) ? y+2 : size_li_inactive;
+        $('#inactiveAirportsList li:lt('+y+')').show(200);
+      });
+      $('#showLessInactive').click(function () {
+        x=(y-2<0) ? 3 : y-2;
+        $('#inactiveAirportsList li').not(':lt('+y+')').hide(200);
+      });
+    });
+  </script>
+
+
+  <!--For filtering inactive airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#searchNamesInactive").on('change keyup keydown paste cut' ,function(){
+        var val = $(this).val();
+        $( "ul li").each(function(){
+          var $this = $(this)
+          if($this.html().indexOf(val) == -1){
+            $this.fadeOut(300, function() {this.closest('li');}); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+          }
+          else {$this.fadeIn(300, function() {this.closest('li');});
+          }
+        });
+      });
+    });
+  </script>
+
+
+  <!--<script src="https://code.jquery.com/jquery-2.0.2.js"></script>-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+
+    $("div#inActiveAirportsDiv").hide();
+
+    $(document).on('change',"input[name='subscribe']", function(){
+      if ( $(this).is(':checked') ){
+        $("div#inActiveAirportsDiv").css("visibility","visible");
+        $("div#activeAirportsDiv").hide();
+      }
+      else{
+        $("div#inActiveAirportsDiv").css("visibility","hidden");
+        $("div#activeAirportsDiv").show();
+      }
+    });
+  </script>
+
+
+    <p style="position: absolute;left: 400px;top: 114px; color: snow;" class="inActAirprt">Inactive Airports <input type="checkbox" name="subscribe" id="checkBoxId" class="checkbox-custom"/></p>
+
+    <!--For active airports-->
+    <div class="box green" id="activeAirportsDiv">
     <span class="title">Active Airports List</span>
     <!--<input type="search" id="searchNames" >-->
     <form method="post">
-      <input type="text" class="textbox" id="searchNames" placeholder="Search">
+      <input type="text" class="textbox" id="searchNames" placeholder="Search Active Airports">
 
     </form>
     <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
@@ -403,6 +466,37 @@
     <div id="showLess">Show less</div>
   </div>
 
+    <!--For inactive airports-->
+    <div class="box orange" id="inActiveAirportsDiv" style="visibility: hidden">
+    <span class="title">Inactive Airports List</span>
+    <!--<input type="search" id="searchNames" >-->
+    <form method="post">
+      <input type="text" class="textbox" id="searchNamesInactive" placeholder="Search Inactive Airports">
+
+    </form>
+    <ul id="inactiveAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
+      {{#summaryInactive}}
+      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
+        <div style="display: table">
+          <div style="display: table-cell; float: left;width: 600px;">
+            <h2><label>Airport Name: </label>{{name}}</h2>
+            <h2><label>City: </label>{{city}}</h2>
+            <h2><label>Country: </label>{{countryName}}</h2>
+            <h2><label>Region: </label>{{regionName}}</h2>
+            <h3><label>Airport ICAO: </label>{{icao}}</h3>
+            <h3><label>Airport IATA: </label>{{iata}}</h3>
+            <h3><label>Airport FAA: </label>{{faa}}</h3>
+            <h3><label>Airport FS: </label>{{fs}}</h3>
+          </div>
+        </div>
+      </li>
+      {{/summaryInactive}}
+    </ul>
+
+    <div id="loadMoreInactive">Show more</div>
+    <div id="showLessInactive">Show less</div>
+  </div >
+
 </ul>
 <p style="position: absolute;top: 900px;left: 1600px;">developed by
   <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
@@ -411,3 +505,10 @@
 
 
 </html>
+
+
+
+<!--
+https://jsfiddle.net/icebob/m7o1Lase/
+Açılışta kullanılacak dropdownlu kod
+-->

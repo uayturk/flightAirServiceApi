@@ -2,8 +2,10 @@
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
-  position: relative;
+  position: absolute;
   vertical-align: middle;
+  left:1400px;    /*This is css for country choose*/
+  top:123px;
 }
 
 .select2-container .select2-selection--single {

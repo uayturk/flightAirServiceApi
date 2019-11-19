@@ -238,3 +238,133 @@ form > .textbox {
   border-radius: 4px 0 0 4px;
 }
 
+
+
+/*Css properties for Inactive airports*/
+
+#inactiveAirportsList::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#inactiveAirportsList::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#inactiveAirportsList::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+/*End of the scroll view for lazy load*/
+
+
+#loadMoreInactive {
+  position: absolute;
+  top: 893px;
+  left:96px;
+  width: 190px;
+  padding: 10px;
+  text-align: center;
+  /*background-color: #33739E; blue one*/
+  background-color: #8EBD40;
+  color: #fff;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #fff;
+  box-shadow: 0 1px 1px #ccc;
+  transition: all 600ms ease-in-out !important;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out !important;
+  border-radius: 1.5em;
+}
+#loadMoreInactive:hover {
+  background-color: #fff;
+  color: #8EBD40;
+}
+#showLessInactive {
+  position: absolute;
+  top: 893px;
+  left:320px;
+  width: 215px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ee5f4a;
+  color: #fff;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #fff;
+  box-shadow: 0 1px 1px #ccc;
+  transition: all 600ms ease-in-out !important;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out !important;
+  border-radius: 1.5em;
+}
+#showLessInactive:hover {
+  background-color: #fff;
+  color: #ee5f4a;
+}
+
+
+/*Checkbox css*/
+.checkbox-custom {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+}
+
+.checkbox-custom:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  background-color: lightgrey;
+  display: block;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #dedede;
+  border-radius: 2px;
+}
+
+.checkbox-custom[type=checkbox]:before {
+  background: #f6ac4f url("http://i.imgur.com/dR1TM0y.png");
+  background-size: 10px 8px;
+  background-repeat: no-repeat;
+  background-position: 3px 4px;
+  position: absolute;
+  left: 2px;
+  z-index: 2;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  color: #f6ac4f;
+}
+
+.checkbox-custom[type=checkbox]:checked:before {
+  content: '';
+  position: absolute;
+  opacity: 1;
+  left: 5px;
+  top: 2px;
+  border: 1px solid #f6ac4f;
+  border-radius: 2px;
+}

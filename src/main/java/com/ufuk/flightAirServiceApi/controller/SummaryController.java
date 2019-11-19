@@ -44,6 +44,7 @@ public class SummaryController {
   public String summary(ModelMap modelMap) throws IOException {
 
     modelMap.addAttribute("summaryActive", airportService.getActiveOrInactiveAirports(true));
+    modelMap.addAttribute("summaryInactive", airportService.getActiveOrInactiveAirports(false));
     modelMap.addAttribute("summaryChosen", airportService.getAirportsByCountryName(chosenCountryName.getChosenCountryName()));
 
     return "summary";
