@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/flag-icon.css" rel="stylesheet" type="text/css">
-    <link href="css/select2.css" rel="stylesheet" type="text/css">
+  <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/flag-icon.css" rel="stylesheet" type="text/css">
+  <link href="css/select2.css" rel="stylesheet" type="text/css">
 </head>
 
 <h1>FlightApi</h1>
@@ -19,95 +19,99 @@
   <!--For country chose-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
-  <select name="country" id="selectCountryId"><option></option></select>
+  <select name="country" id="selectCountryId">
+    <option></option>
+  </select>
+
+  <!--For country choose & find-->
   <script>
-    (function($) {
-      $(function() {
+    (function ($) {
+      $(function () {
         var isoCountries = [
-          { id: 'AF', text: 'Afghanistan'},
+          {id: 'AF', text: 'Afghanistan'},
           //{ id: 'AX', text: 'Aland Islands'},
-          { id: 'AL', text: 'Albania'},
-          { id: 'DZ', text: 'Algeria'},
-          { id: 'AS', text: 'American Samoa'},
+          {id: 'AL', text: 'Albania'},
+          {id: 'DZ', text: 'Algeria'},
+          {id: 'AS', text: 'American Samoa'},
           //{ id: 'AD', text: 'Andorra'},
-          { id: 'AO', text: 'Angola'},
+          {id: 'AO', text: 'Angola'},
           //{ id: 'AI', text: 'Anguilla'},
           //{ id: 'AQ', text: 'Antarctica'},
-          { id: 'AG', text: 'Antigua and Barbuda'},
-          { id: 'AR', text: 'Argentina'},
-          { id: 'AM', text: 'Armenia'},
+          {id: 'AG', text: 'Antigua and Barbuda'},
+          {id: 'AR', text: 'Argentina'},
+          {id: 'AM', text: 'Armenia'},
           //{ id: 'AW', text: 'Aruba'},
-          { id: 'AU', text: 'Australia'},
-          { id: 'AT', text: 'Austria'},
+          {id: 'AU', text: 'Australia'},
+          {id: 'AT', text: 'Austria'},
           //{ id: 'AZ', text: 'Azerbaijan'},
           //{ id: 'BS', text: 'Bahamas'},
           //{ id: 'BH', text: 'Bahrain'},
-          { id: 'BD', text: 'Bangladesh'},
+          {id: 'BD', text: 'Bangladesh'},
           //{ id: 'BB', text: 'Barbados'},
-          { id: 'BY', text: 'Belarus'},
-          { id: 'BE', text: 'Belgium'},
+          {id: 'BY', text: 'Belarus'},
+          {id: 'BE', text: 'Belgium'},
           //{ id: 'BZ', text: 'Belize'},
           //{ id: 'BJ', text: 'Benin'},
           //{ id: 'BM', text: 'Bermuda'},
           //{ id: 'BT', text: 'Bhutan'},
-          { id: 'BO', text: 'Bolivia'},
+          {id: 'BO', text: 'Bolivia'},
           //{ id: 'BA', text: 'Bosnia And Herzegovina'},
           //{ id: 'BW', text: 'Botswana'},
           //{ id: 'BV', text: 'Bouvet Island'},
-          { id: 'BR', text: 'Brazil'},
+          {id: 'BR', text: 'Brazil'},
           //{ id: 'IO', text: 'British Indian Ocean Territory'},
           //{ id: 'BN', text: 'Brunei Darussalam'},
-          { id: 'BG', text: 'Bulgaria'},
+          {id: 'BG', text: 'Bulgaria'},
           //{ id: 'BF', text: 'Burkina Faso'},
-          { id: 'BI', text: 'Burundi'},
-          { id: 'KH', text: 'Cambodia'},
+          {id: 'BI', text: 'Burundi'},
+          {id: 'KH', text: 'Cambodia'},
           //{ id: 'CM', text: 'Cameroon'},
-          { id: 'CA', text: 'Canada'},
+          {id: 'CA', text: 'Canada'},
           //{ id: 'CV', text: 'Cape Verde'},
           //{ id: 'KY', text: 'Cayman Islands'},
           //{ id: 'CF', text: 'Central African Republic'},
           //{ id: 'TD', text: 'Chad'},
-          { id: 'CL', text: 'Chile'},
-          { id: 'CN', text: 'China'},
+          {id: 'CL', text: 'Chile'},
+          {id: 'CN', text: 'China'},
           //{ id: 'CX', text: 'Christmas Island'},
           //{ id: 'CC', text: 'Cocos (Keeling) Islands'},
-          { id: 'CO', text: 'Colombia'},
+          {id: 'CO', text: 'Colombia'},
           //{ id: 'KM', text: 'Comoros'},
           //{ id: 'CG', text: 'Congo'},
           //{ id: 'CK', text: 'Cook Islands'},
-          { id: 'CR', text: 'Costa Rica'},
-          { id: 'CI', text: 'Cote D\'Ivoire'},
+          {id: 'CR', text: 'Costa Rica'},
+          {id: 'CI', text: 'Cote D\'Ivoire'},
           //{ id: 'HR', text: 'Croatia'},
-          { id: 'CU', text: 'Cuba'},
-          { id: 'CY', text: 'Cyprus'},
-          { id: 'CZ', text: 'Czechia'},
-          { id: 'DK', text: 'Denmark'},
-          { id: 'CD', text: 'Democratic Republic of the Congo'},
+          {id: 'CU', text: 'Cuba'},
+          {id: 'CY', text: 'Cyprus'},
+          {id: 'CZ', text: 'Czechia'},
+          {id: 'DK', text: 'Denmark'},
+          {id: 'CD', text: 'Democratic Republic of the Congo'},
           //{ id: 'DJ', text: 'Djibouti'},
           //{ id: 'DM', text: 'Dominica'},
-          { id: 'DO', text: 'Dominican Republic'},
-          { id: 'EC', text: 'Ecuador'},
-          { id: 'EG', text: 'Egypt'},
-          { id: 'SV', text: 'El Salvador'},
+          {id: 'DO', text: 'Dominican Republic'},
+          {id: 'EC', text: 'Ecuador'},
+          {id: 'EG', text: 'Egypt'},
+          {id: 'SV', text: 'El Salvador'},
           //{ id: 'GQ', text: 'Equatorial Guinea'},
           //{ id: 'ER', text: 'Eritrea'},
-          { id: 'EE', text: 'Estonia'},
+          {id: 'EE', text: 'Estonia'},
           //{ id: 'ET', text: 'Ethiopia'},
           //{ id: 'FK', text: 'Falkland Islands (Malvinas)'},
           //{ id: 'FO', text: 'Faroe Islands'},
           //{ id: 'FJ', text: 'Fiji'},
-          { id: 'FI', text: 'Finland'},
-          { id: 'FR', text: 'France'},
+          {id: 'FI', text: 'Finland'},
+          {id: 'FR', text: 'France'},
           //{ id: 'GF', text: 'French Guiana'},
           //{ id: 'PF', text: 'French Polynesia'},
           //{ id: 'TF', text: 'French Southern Territories'},
           //{ id: 'GA', text: 'Gabon'},
           //{ id: 'GM', text: 'Gambia'},
-          { id: 'GE', text: 'Georgia'},
-          { id: 'DE', text: 'Germany'},
+          {id: 'GE', text: 'Georgia'},
+          {id: 'DE', text: 'Germany'},
           //{ id: 'GH', text: 'Ghana'},
-          { id: 'GI', text: 'Gibraltar'},
-          { id: 'GR', text: 'Greece'},
+          {id: 'GI', text: 'Gibraltar'},
+          {id: 'GR', text: 'Greece'},
           //{ id: 'GL', text: 'Greenland'},
           //{ id: 'GD', text: 'Grenada'},
           //{ id: 'GP', text: 'Guadeloupe'},
@@ -117,46 +121,46 @@
           //{ id: 'GN', text: 'Papua New Guinea'},
           //{ id: 'GW', text: 'Guinea-Bissau'},
           //{ id: 'GY', text: 'Guyana'},
-          { id: 'HT', text: 'Haiti'},
+          {id: 'HT', text: 'Haiti'},
           //{ id: 'HM', text: 'Heard Island & Mcdonald Islands'},
           //{ id: 'VA', text: 'Holy See (Vatican City State)'},
           //{ id: 'HN', text: 'Honduras'},
-          { id: 'HK', text: 'Hong Kong'},
-          { id: 'HU', text: 'Hungary'},
-          { id: 'IS', text: 'Iceland'},
-          { id: 'IN', text: 'India'},
-          { id: 'ID', text: 'Indonesia'},
-          { id: 'IR', text: 'Iran'},
-          { id: 'IQ', text: 'Iraq'},
-          { id: 'IE', text: 'Ireland'},
+          {id: 'HK', text: 'Hong Kong'},
+          {id: 'HU', text: 'Hungary'},
+          {id: 'IS', text: 'Iceland'},
+          {id: 'IN', text: 'India'},
+          {id: 'ID', text: 'Indonesia'},
+          {id: 'IR', text: 'Iran'},
+          {id: 'IQ', text: 'Iraq'},
+          {id: 'IE', text: 'Ireland'},
           //{ id: 'IM', text: 'Isle Of Man'},
-          { id: 'IL', text: 'Israel'},
-          { id: 'IT', text: 'Italy'},
-          { id: 'JM', text: 'Jamaica'},
-          { id: 'JP', text: 'Japan'},
+          {id: 'IL', text: 'Israel'},
+          {id: 'IT', text: 'Italy'},
+          {id: 'JM', text: 'Jamaica'},
+          {id: 'JP', text: 'Japan'},
           //{ id: 'JE', text: 'Jersey'},
           //{ id: 'JO', text: 'Jordan'},
-          { id: 'KZ', text: 'Kazakhstan'},
-          { id: 'KE', text: 'Kenya'},
+          {id: 'KZ', text: 'Kazakhstan'},
+          {id: 'KE', text: 'Kenya'},
           //{ id: 'KI', text: 'Kiribati'},
-          { id: 'KR', text: 'South Korea'},
+          {id: 'KR', text: 'South Korea'},
           //{ id: 'KW', text: 'Kuwait'},
           //{ id: 'KG', text: 'Kyrgyzstan'},
-          { id: 'LA', text: 'Laos'},
-          { id: 'LV', text: 'Latvia'},
+          {id: 'LA', text: 'Laos'},
+          {id: 'LV', text: 'Latvia'},
           //{ id: 'LB', text: 'Lebanon'},
           //{ id: 'LS', text: 'Lesotho'},
           //{ id: 'LR', text: 'Liberia'},
-          { id: 'LY', text: 'Libya'},
+          {id: 'LY', text: 'Libya'},
           //{ id: 'LI', text: 'Liechtenstein'},
-          { id: 'LT', text: 'Lithuania'},
+          {id: 'LT', text: 'Lithuania'},
           //{ id: 'LU', text: 'Luxembourg'},
           //{ id: 'MO', text: 'Macao'},
           //{ id: 'MK', text: 'Macedonia'},
           //{ id: 'MG', text: 'Madagascar'},
           //{ id: 'MW', text: 'Malawi'},
-          { id: 'MY', text: 'Malaysia'},
-          { id: 'MV', text: 'Maldives'},
+          {id: 'MY', text: 'Malaysia'},
+          {id: 'MV', text: 'Maldives'},
           //{ id: 'ML', text: 'Mali'},
           //{ id: 'MT', text: 'Malta'},
           //{ id: 'MH', text: 'Marshall Islands'},
@@ -164,47 +168,47 @@
           //{ id: 'MR', text: 'Mauritania'},
           //{ id: 'MU', text: 'Mauritius'},
           //{ id: 'YT', text: 'Mayotte'},
-          { id: 'MX', text: 'Mexico'},
+          {id: 'MX', text: 'Mexico'},
           //{ id: 'FM', text: 'Micronesia}, Federated States Of'},
           //{ id: 'MD', text: 'Moldova'},
           //{ id: 'MC', text: 'Monaco'},
-          { id: 'MN', text: 'Mongolia'},
+          {id: 'MN', text: 'Mongolia'},
           //{ id: 'ME', text: 'Montenegro'},
           //{ id: 'MS', text: 'Montserrat'},
-          { id: 'MA', text: 'Morocco'},
+          {id: 'MA', text: 'Morocco'},
           //{ id: 'MZ', text: 'Mozambique'},
-          { id: 'MM', text: 'Myanmar'},
+          {id: 'MM', text: 'Myanmar'},
           //{ id: 'NA', text: 'Namibia'},
           //{ id: 'NR', text: 'Nauru'},
-          { id: 'NP', text: 'Nepal'},
-          { id: 'NL', text: 'Netherlands'},
+          {id: 'NP', text: 'Nepal'},
+          {id: 'NL', text: 'Netherlands'},
           //{ id: 'AN', text: 'Netherlands Antilles'},
           //{ id: 'NC', text: 'New Caledonia'},
-          { id: 'NZ', text: 'New Zealand'},
+          {id: 'NZ', text: 'New Zealand'},
           //{ id: 'NI', text: 'Nicaragua'},
           //{ id: 'NE', text: 'Niger'},
-          { id: 'NG', text: 'Nigeria'},
+          {id: 'NG', text: 'Nigeria'},
           //{ id: 'NU', text: 'Niue'},
           //{ id: 'NF', text: 'Norfolk Island'},
           //{ id: 'MP', text: 'Northern Mariana Islands'},
-          { id: 'NO', text: 'Norway'},
+          {id: 'NO', text: 'Norway'},
           //{ id: 'OM', text: 'Oman'},
-          { id: 'PK', text: 'Pakistan'},
+          {id: 'PK', text: 'Pakistan'},
           //{ id: 'PW', text: 'Palau'},
           //{ id: 'PS', text: 'Palestinian Territory}, Occupied'},
-          { id: 'PA', text: 'Panama '},
-          { id: 'PG', text: 'Papua New Guinea'},
-          { id: 'PY', text: 'Paraguay'},
-          { id: 'PE', text: 'Peru'},
-          { id: 'PH', text: 'Philippines'},
+          {id: 'PA', text: 'Panama '},
+          {id: 'PG', text: 'Papua New Guinea'},
+          {id: 'PY', text: 'Paraguay'},
+          {id: 'PE', text: 'Peru'},
+          {id: 'PH', text: 'Philippines'},
           //{ id: 'PN', text: 'Pitcairn'},
-          { id: 'PL', text: 'Poland'},
-          { id: 'PT', text: 'Portugal'},
-          { id: 'PR', text: 'Puerto Rico'},
+          {id: 'PL', text: 'Poland'},
+          {id: 'PT', text: 'Portugal'},
+          {id: 'PR', text: 'Puerto Rico'},
           //{ id: 'QA', text: 'Qatar'},
           //{ id: 'RE', text: 'Reunion'},
-          { id: 'RO', text: 'Romania'},
-          { id: 'RU', text: 'Russia'},
+          {id: 'RO', text: 'Romania'},
+          {id: 'RU', text: 'Russia'},
           //{ id: 'RW', text: 'Rwanda'},
           //{ id: 'BL', text: 'Saint Barthelemy'},
           //{ id: 'SH', text: 'Saint Helena'},
@@ -216,69 +220,69 @@
           //{ id: 'WS', text: 'Samoa'},
           //{ id: 'SM', text: 'San Marino'},
           //{ id: 'ST', text: 'Sao Tome And Principe'},
-          { id: 'SA', text: 'Saudi Arabia'},
-          { id: 'SN', text: 'Senegal'},
-          { id: 'RS', text: 'Serbia'},
+          {id: 'SA', text: 'Saudi Arabia'},
+          {id: 'SN', text: 'Senegal'},
+          {id: 'RS', text: 'Serbia'},
           //{ id: 'SC', text: 'Seychelles'},
           //{ id: 'SL', text: 'Sierra Leone'},
-          { id: 'SG', text: 'Singapore'},
-          { id: 'SK', text: 'Slovakia'},
+          {id: 'SG', text: 'Singapore'},
+          {id: 'SK', text: 'Slovakia'},
           //{ id: 'SI', text: 'Slovenia'},
           //{ id: 'SB', text: 'Solomon Islands'},
-          { id: 'SO', text: 'Somalia'},
-          { id: 'ZA', text: 'South Africa'},
+          {id: 'SO', text: 'Somalia'},
+          {id: 'ZA', text: 'South Africa'},
           //{ id: 'GS', text: 'South Georgia And Sandwich Isl.'},
-          { id: 'ES', text: 'Spain'},
-          { id: 'LK', text: 'Sri Lanka'},
-          { id: 'SD', text: 'Sudan'},
-          { id: 'SR', text: 'Suriname'},
+          {id: 'ES', text: 'Spain'},
+          {id: 'LK', text: 'Sri Lanka'},
+          {id: 'SD', text: 'Sudan'},
+          {id: 'SR', text: 'Suriname'},
           //{ id: 'SJ', text: 'Svalbard And Jan Mayen'},
           //{ id: 'SZ', text: 'Swaziland'},
-          { id: 'SE', text: 'Sweden'},
+          {id: 'SE', text: 'Sweden'},
           //{ id: 'CH', text: 'Switzerland'},
-          { id: 'SY', text: 'Syria'},
-          { id: 'TW', text: 'Taiwan'},
-          { id: 'TJ', text: 'Tajikistan'},
-          { id: 'TZ', text: 'Tanzania'},
-          { id: 'TH', text: 'Thailand'},
-          { id: 'TL', text: 'Timor-Leste'},
+          {id: 'SY', text: 'Syria'},
+          {id: 'TW', text: 'Taiwan'},
+          {id: 'TJ', text: 'Tajikistan'},
+          {id: 'TZ', text: 'Tanzania'},
+          {id: 'TH', text: 'Thailand'},
+          {id: 'TL', text: 'Timor-Leste'},
           //{ id: 'TG', text: 'Togo'},
           //{ id: 'TK', text: 'Tokelau'},
           //{ id: 'TO', text: 'Tonga'},
           //{ id: 'TT', text: 'Trinidad And Tobago'},
-          { id: 'TN', text: 'Tunisia'},
-          { id: 'TR', text: 'Turkey'},
-          { id: 'TM', text: 'Turkmenistan'},
+          {id: 'TN', text: 'Tunisia'},
+          {id: 'TR', text: 'Turkey'},
+          {id: 'TM', text: 'Turkmenistan'},
           //{ id: 'TC', text: 'Turks And Caicos Islands'},
           //{ id: 'TV', text: 'Tuvalu'},
           //{ id: 'UG', text: 'Uganda'},
-          { id: 'UA', text: 'Ukraine'},
-          { id: 'AE', text: 'United Arab Emirates'},
-          { id: 'GB', text: 'United Kingdom'},
-          { id: 'US', text: 'United States'},
+          {id: 'UA', text: 'Ukraine'},
+          {id: 'AE', text: 'United Arab Emirates'},
+          {id: 'GB', text: 'United Kingdom'},
+          {id: 'US', text: 'United States'},
           //{ id: 'UM', text: 'United States Outlying Islands'},
-          { id: 'UY', text: 'Uruguay'},
-          { id: 'UZ', text: 'Uzbekistan'},
+          {id: 'UY', text: 'Uruguay'},
+          {id: 'UZ', text: 'Uzbekistan'},
           //{ id: 'VU', text: 'Vanuatu'},
-          { id: 'VE', text: 'Venezuela'},
-          { id: 'VN', text: 'Vietnam'},
+          {id: 'VE', text: 'Venezuela'},
+          {id: 'VN', text: 'Vietnam'},
           //{ id: 'VG', text: 'Virgin Islands}, British'},
           //{ id: 'VI', text: 'Virgin Islands}, U.S.'},
           //{ id: 'WF', text: 'Wallis And Futuna'},
           //{ id: 'EH', text: 'Western Sahara'},
-          { id: 'YE', text: 'Yemen'},
+          {id: 'YE', text: 'Yemen'},
           //{ id: 'ZM', text: 'Zambia'},
-          { id: 'ZW', text: 'Zimbabwe'}
+          {id: 'ZW', text: 'Zimbabwe'}
         ];
 
-        function formatCountry (country) {
+        function formatCountry(country) {
 
           if (!country.id) {
             return country.text;
           }
           var $country = $(
-              '<span class="flag-icon flag-icon-'+ country.id.toLowerCase() +' flag-icon-squared"></span>' +
-              '<span class="flag-text">'+ country.text+"</span>"
+              '<span class="flag-icon flag-icon-' + country.id.toLowerCase() + ' flag-icon-squared"></span>' +
+              '<span class="flag-text">' + country.text + "</span>"
           );
           return $country;
         };
@@ -291,19 +295,19 @@
           data: isoCountries
         })
         //When you select the country this code will run and return selected country.
-        $("[name='country']").on('change', function() {
+        $("[name='country']").on('change', function () {
           var data = $('#selectCountryId :selected').text();
-          console.log("Selected Country : ",data);
+          console.log("Selected Country : ", data);
 
           var selectedCountryName = {
-            selectedCountryName : data
+            selectedCountryName: data
           };
 
           $.ajax({
             type: "POST",
             url: 'getCountryNameFromJquery',//do not put the full url,you need use an absolute url
             data: selectedCountryName,//put search js object directly here
-            success :function(result) {
+            success: function (result) {
               console.log("Successfuly sent data to the Spring Controller.");
               setTimeout(function () {
                 window.location.reload();
@@ -317,22 +321,45 @@
     })(jQuery);
   </script>
 
-
   <!--For lazy load active airports-->
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
-      console.log("Active airports lazy load");
       size_li = $("#activeAirportsList li").size();
-      x=2;
-      $('#activeAirportsList li:lt('+x+')').show();
+      console.log("Active airports lazy load", size_li);
+      x = 2;
+      console.log("ACCCTTTIIVVEEEeeee", $('#activeAirportsList li:lt(' + x + ')'));
+      $('#activeAirportsList li:lt(' + x + ')').show();
       $('#loadMore').click(function () {
-        x= (x+2 <= size_li) ? x+2 : size_li;  // x+2 means show it two by two. (ikişerli gösterir. 3 olursa 3erli gösterir)
-        $('#activeAirportsList li:lt('+x+')').show(200);
+        x = (x + 2 <= size_li) ? x + 2 : size_li;  // x+2 means show it two by two. (ikişerli gösterir. 3 olursa 3erli gösterir)
+        $('#activeAirportsList li:lt(' + x + ')').show(200);
       });
       $('#showLess').click(function () {
-        x=(x-2<0) ? 3 : x-2;
-        $('#activeAirportsList li').not(':lt('+x+')').hide(200);
+        x = (x - 2 < 0) ? 3 : x - 2;
+        $('#activeAirportsList li').not(':lt(' + x + ')').hide(200);
+      });
+    });
+  </script>
+
+  <!--For lazy load inactive airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      size_li_inactive = $("#inactiveAirportsList li").size();
+      console.log("İNNNNNActive airports lazy load", size_li_inactive);
+      y = 2;
+      console.log("İNNNNNActiveeeeeeeePPPP ", $('#inactiveAirportsList li:lt(' + y + ')').show());
+      $('#inactiveAirportsList li:lt(' + y + ')').show();
+      //$('#inactiveAirportsList li:lt('+y+')', this).show();
+      $('#loadMoreInactive').click(function () {
+        console.log("İNNNNNActive load moooorrreeee ");
+        y = (y + 2 <= size_li_inactive) ? y + 2 : size_li_inactive;
+        $('#inactiveAirportsList li:lt(' + y + ')').show(200);
+      });
+      $('#showLessInactive').click(function () {
+        y = (y - 2 < 0) ? 3 : y - 2;
+        $('#inactiveAirportsList li').not(':lt(' + y + ')').hide(200);
+        console.log("İNNNNNActive load lessssssss ", $('#inactiveAirportsList li').not(':lt(' + y + ')'));
       });
     });
   </script>
@@ -342,71 +369,58 @@
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
-    console.log("fgdgdgdgdgddgdg");
-    $("#searchNames").on('change keyup keydown paste cut' ,function(){
-      var val = $(this).val();
-      console.log("fgdgdgdgdgddgdg 111111111111111111111111111111111111");
-      $( "ul li").each(function(){
-        var $this = $(this)
-        if($this.html().indexOf(val) == -1){
-          $this.fadeOut(300, function() {this.closest('li');}); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
-        }
-        else {$this.fadeIn(300, function() {this.closest('li');});
-        }
-    });
-    });
+      console.log("fgdgdgdgdgddgdg");
+      $("#searchNames").on('change keyup keydown paste cut', function () {
+        var val = $(this).val();
+        console.log("fgdgdgdgdgddgdg 111111111111111111111111111111111111");
+        $("ul li").each(function () {
+          var $this = $(this)
+          if ($this.html().indexOf(val) == -1) {
+            $this.fadeOut(300, function () {
+              this.closest('li');
+            }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+          } else {
+            $this.fadeIn(300, function () {
+              this.closest('li');
+            });
+          }
+        });
+      });
     });
   </script>
 
-  {{#summaryChosen}}
-  <div style="width: 265px;float: left;margin-right: 25px;color: #8EBD40; ">
-    <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
-      <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
-      <div style="display: table">
-        <div style="display: table-cell; float: left;width: 600px;">
-          <h2>{{city}}</h2>
+  <!--
+    {{#summaryChosen}}
+    <div style="width: 265px;float: left;margin-right: 25px;color: #8EBD40; ">
+      <ul style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;">
+        <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+          <div style="display: table-cell; float: left;width: 600px;">
+            <h2>{{city}}</h2>
+          </div>
         </div>
-      </div>
-      </li>
-    </ul>
-  </div>
-  {{/summaryChosen}}
-
-
-
-
-  <!--For lazy load inactive airports-->
-  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-  <script>
-    $(document).ready(function () {
-      size_li_inactive = $("#inactiveAirportsList li").size();
-      console.log("İNNNNNActive airports lazy load");
-      y=2;
-      $('#inactiveAirportsList li:lt('+y+')').show();
-      $('#loadMoreInactive').click(function () {
-        y= (y+2 <= size_li_inactive) ? y+2 : size_li_inactive;
-        $('#inactiveAirportsList li:lt('+y+')').show(200);
-      });
-      $('#showLessInactive').click(function () {
-        x=(y-2<0) ? 3 : y-2;
-        $('#inactiveAirportsList li').not(':lt('+y+')').hide(200);
-      });
-    });
-  </script>
-
+        </li>
+      </ul>
+    </div>
+    {{/summaryChosen}}
+  -->
 
   <!--For filtering inactive airports-->
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
-      $("#searchNamesInactive").on('change keyup keydown paste cut' ,function(){
+      $("#searchNamesInactive").on('change keyup keydown paste cut', function () {
         var val = $(this).val();
-        $( "ul li").each(function(){
+        $("ul li").each(function () {
           var $this = $(this)
-          if($this.html().indexOf(val) == -1){
-            $this.fadeOut(300, function() {this.closest('li');}); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
-          }
-          else {$this.fadeIn(300, function() {this.closest('li');});
+          if ($this.html().indexOf(val) == -1) {
+            $this.fadeOut(300, function () {
+              this.closest('li');
+            }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+          } else {
+            $this.fadeIn(300, function () {
+              this.closest('li');
+            });
           }
         });
       });
@@ -420,82 +434,134 @@
 
     $("div#inActiveAirportsDiv").hide();
 
-    $(document).on('change',"input[name='subscribe']", function(){
-      if ( $(this).is(':checked') ){
-        $("div#inActiveAirportsDiv").css("visibility","visible");
+    $(document).on('change', "input[name='subscribe']", function () {
+      if ($(this).is(':checked')) {
+        $("div#inActiveAirportsDiv").css("visibility", "visible");
         $("div#activeAirportsDiv").hide();
-      }
-      else{
-        $("div#inActiveAirportsDiv").css("visibility","hidden");
+      } else {
+        $("div#inActiveAirportsDiv").css("visibility", "hidden");
         $("div#activeAirportsDiv").show();
       }
     });
   </script>
 
+  <div class="wrapper">
+    <!--For active & inactive airports on the left of the page (1.Column)-->
+    <div class="column">
+      <p style="position: absolute;left: 400px;top: 114px; color: snow;" class="inActAirprt">Inactive Airports <input
+          type="checkbox" name="subscribe" id="checkBoxId" class="checkbox-custom"/></p>
 
-    <p style="position: absolute;left: 400px;top: 114px; color: snow;" class="inActAirprt">Inactive Airports <input type="checkbox" name="subscribe" id="checkBoxId" class="checkbox-custom"/></p>
+      <!--For active airports-->
+      <div class="box green" id="activeAirportsDiv">
+        <span class="title">Active Airports List</span>
+        <!--<input type="search" id="searchNames" >-->
+        <form method="post">
+          <input type="text" class="textbox" id="searchNames" placeholder="Search Active Airports">
 
-    <!--For active airports-->
-    <div class="box green" id="activeAirportsDiv">
-    <span class="title">Active Airports List</span>
-    <!--<input type="search" id="searchNames" >-->
-    <form method="post">
-      <input type="text" class="textbox" id="searchNames" placeholder="Search Active Airports">
+        </form>
+        <ul id="activeAirportsList"
+            style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
+          {{#summaryActive}}
+          <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:300px; width: 395px">
+            <div style="display: table">
+              <div style="display: table-cell; float: left;width: 600px;">
+                <h2><label>Airport Name: </label>{{name}}</h2>
+                <h2><label>City: </label>{{city}}</h2>
+                <h2><label>Country: </label>{{countryName}}</h2>
+                <h2><label>Region: </label>{{regionName}}</h2>
+                <h3><label>Airport ICAO: </label>{{icao}}</h3>
+                <h3><label>Airport IATA: </label>{{iata}}</h3>
+                <h3><label>Airport FAA: </label>{{faa}}</h3>
+                <h3><label>Airport FS: </label>{{fs}}</h3>
+              </div>
+            </div>
+          </li>
+          {{/summaryActive}}
+        </ul>
 
-    </form>
-    <ul id="activeAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
-      {{#summaryActive}}
-      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
-        <div style="display: table">
-          <div style="display: table-cell; float: left;width: 600px;">
-            <h2><label>Airport Name: </label>{{name}}</h2>
-            <h2><label>City: </label>{{city}}</h2>
-            <h2><label>Country: </label>{{countryName}}</h2>
-            <h2><label>Region: </label>{{regionName}}</h2>
-            <h3><label>Airport ICAO: </label>{{icao}}</h3>
-            <h3><label>Airport IATA: </label>{{iata}}</h3>
-            <h3><label>Airport FAA: </label>{{faa}}</h3>
-            <h3><label>Airport FS: </label>{{fs}}</h3>
-          </div>
-        </div>
-      </li>
-      {{/summaryActive}}
-    </ul>
+        <div id="loadMore">Show more</div>
+        <div id="showLess">Show less</div>
+      </div>
 
-    <div id="loadMore">Show more</div>
-    <div id="showLess">Show less</div>
+      <!--For inactive airports-->
+      <div class="box orange" id="inActiveAirportsDiv" style="visibility: hidden">
+        <span class="title">Inactive Airports List</span>
+        <!--<input type="search" id="searchNames" >-->
+        <form method="post">
+          <input type="text" class="textbox" id="searchNamesInactive" placeholder="Search Inactive Airports">
+
+        </form>
+        <ul id="inactiveAirportsList"
+            style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
+          {{#summaryInactive}}
+          <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:300px; width: 395px">
+            <div style="display: table">
+              <div style="display: table-cell; float: left;width: 600px;">
+                <h2><label>Airport Name: </label>{{name}}</h2>
+                <h2><label>City: </label>{{city}}</h2>
+                <h2><label>Country: </label>{{countryName}}</h2>
+                <h2><label>Region: </label>{{regionName}}</h2>
+                <h3><label>Airport ICAO: </label>{{icao}}</h3>
+                <h3><label>Airport IATA: </label>{{iata}}</h3>
+                <h3><label>Airport FAA: </label>{{faa}}</h3>
+                <h3><label>Airport FS: </label>{{fs}}</h3>
+              </div>
+            </div>
+          </li>
+          {{/summaryInactive}}
+        </ul>
+
+        <div id="loadMoreInactive">Show more</div>
+        <div id="showLessInactive">Show less</div>
+      </div>
+    </div>
+
+    <!--TODO This will fill-->
+    <div class="column"></div>
+
+    <!--For choosen country airports on the right of the page (3.Column)-->
+    <div class="column">
+
+      <div class="box orange" id="airportsChosenDiv" style="visibility: hidden">
+        <span class="title">Airports List</span>
+        <!--<input type="search" id="searchNames" >-->
+        <form method="post">
+          <input type="text" class="textbox" id="airportsChosenDivSearchNames" placeholder="Search Inactive Airports">
+
+        </form>
+        <ul id="airportsChosenList"
+            style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
+          {{#summaryChosen}}
+          <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:300px; width: 395px">
+            <div style="display: table">
+              <div style="display: table-cell; float: left;width: 600px;">
+                <h2><label>Airport Name: </label>{{name}}</h2>
+                <h2><label>City: </label>{{city}}</h2>
+                <h2><label>Country: </label>{{countryName}}</h2>
+                <h2><label>Region: </label>{{regionName}}</h2>
+                <h3><label>Airport ICAO: </label>{{icao}}</h3>
+                <h3><label>Airport IATA: </label>{{iata}}</h3>
+                <h3><label>Airport FAA: </label>{{faa}}</h3>
+                <h3><label>Airport FS: </label>{{fs}}</h3>
+              </div>
+            </div>
+          </li>
+          {{/summaryChosen}}
+        </ul>
+
+        <div id="loadMoreAirportsChosen">Show more</div>
+        <div id="showLessAirportsChosen">Show less</div>
+      </div>
+
+    </div>
+
+
+    </div>
   </div>
 
-    <!--For inactive airports-->
-    <div class="box orange" id="inActiveAirportsDiv" style="visibility: hidden">
-    <span class="title">Inactive Airports List</span>
-    <!--<input type="search" id="searchNames" >-->
-    <form method="post">
-      <input type="text" class="textbox" id="searchNamesInactive" placeholder="Search Inactive Airports">
 
-    </form>
-    <ul id="inactiveAirportsList" style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
-      {{#summaryInactive}}
-      <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:280px; width: 395px">
-        <div style="display: table">
-          <div style="display: table-cell; float: left;width: 600px;">
-            <h2><label>Airport Name: </label>{{name}}</h2>
-            <h2><label>City: </label>{{city}}</h2>
-            <h2><label>Country: </label>{{countryName}}</h2>
-            <h2><label>Region: </label>{{regionName}}</h2>
-            <h3><label>Airport ICAO: </label>{{icao}}</h3>
-            <h3><label>Airport IATA: </label>{{iata}}</h3>
-            <h3><label>Airport FAA: </label>{{faa}}</h3>
-            <h3><label>Airport FS: </label>{{fs}}</h3>
-          </div>
-        </div>
-      </li>
-      {{/summaryInactive}}
-    </ul>
+  <!--For chosen airports-->
 
-    <div id="loadMoreInactive">Show more</div>
-    <div id="showLessInactive">Show less</div>
-  </div >
 
 </ul>
 <p style="position: absolute;top: 900px;left: 1600px;">developed by
@@ -505,7 +571,6 @@
 
 
 </html>
-
 
 
 <!--

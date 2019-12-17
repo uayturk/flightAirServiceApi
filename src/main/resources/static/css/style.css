@@ -117,8 +117,8 @@ mark.yellow{
 }
 
 .box{
-  width: 265px;
-  float: left;
+  width: 568px;
+  float: unset;
   margin-right: 25px;
 }
 
@@ -367,4 +367,20 @@ form > .textbox {
   top: 2px;
   border: 1px solid #f6ac4f;
   border-radius: 2px;
+}
+
+
+
+.wrapper {
+  width: 100%;
+  font-size:0px;
+}
+.column {
+  display: table-cell;
+  min-height: 150px;
+  width: 33.33%;
+  border: 1px solid black;
+  /*min-width: 300px;*/
+  margin-bottom: 8px;
+  font-size:16px;
 }
