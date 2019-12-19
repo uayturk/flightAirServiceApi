@@ -439,7 +439,7 @@
         $("div#inActiveAirportsDiv").css("visibility", "visible");
         $("div#activeAirportsDiv").hide();
       } else {
-        $("div#inActiveAirportsDiv").css("visibility", "hidden");
+        $("div#inActiveAirportsDiv").css('visibility','hidden');
         $("div#activeAirportsDiv").show();
       }
     });
@@ -452,7 +452,7 @@
           type="checkbox" name="subscribe" id="checkBoxId" class="checkbox-custom"/></p>
 
       <!--For active airports-->
-      <div class="box green" id="activeAirportsDiv">
+      <div class="box green" id="activeAirportsDiv" style="position: absolute">
         <span class="title">Active Airports List</span>
         <!--<input type="search" id="searchNames" >-->
         <form method="post">
@@ -484,7 +484,7 @@
       </div>
 
       <!--For inactive airports-->
-      <div class="box orange" id="inActiveAirportsDiv" style="visibility: hidden">
+      <div class="box orange" id="inActiveAirportsDiv" style="visibility: hidden; position: absolute;top: 81px;">
         <span class="title">Inactive Airports List</span>
         <!--<input type="search" id="searchNames" >-->
         <form method="post">

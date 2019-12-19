@@ -161,8 +161,8 @@ mark.yellow{
 
 #loadMore {
   position: absolute;
-  top: 893px;
-  left:96px;
+  top: 815px;
+  left: 47px;
   width: 190px;
   padding: 10px;
   text-align: center;
@@ -185,8 +185,8 @@ mark.yellow{
 }
 #showLess {
   position: absolute;
-  top: 893px;
-  left:320px;
+  top: 818px;
+  left: 276px;
   width: 215px;
   padding: 10px;
   text-align: center;
@@ -266,8 +266,8 @@ form > .textbox {
 
 #loadMoreInactive {
   position: absolute;
-  top: 893px;
-  left:96px;
+  top: 815px;
+  left: 47px;
   width: 190px;
   padding: 10px;
   text-align: center;
@@ -290,8 +290,8 @@ form > .textbox {
 }
 #showLessInactive {
   position: absolute;
-  top: 893px;
-  left:320px;
+  top: 818px;
+  left: 276px;
   width: 215px;
   padding: 10px;
   text-align: center;
@@ -346,7 +346,7 @@ form > .textbox {
 }
 
 .checkbox-custom[type=checkbox]:before {
-  background: #f6ac4f url("http://i.imgur.com/dR1TM0y.png");
+  background: #f6ac4f url("../img/checkmark24.ico");
   background-size: 10px 8px;
   background-repeat: no-repeat;
   background-position: 3px 4px;
