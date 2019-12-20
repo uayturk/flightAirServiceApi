@@ -476,11 +476,9 @@
     $(document).on('change', "input[name='subscribe']", function () {
       if ($(this).is(':checked')) {
         $("div#inActiveAirportsDiv").css("visibility", "visible");
-        $("div#airportsChosenDiv").css("visibility", "visible");
         $("div#activeAirportsDiv").hide();
       } else {
         $("div#inActiveAirportsDiv").css('visibility','hidden');
-        $("div#airportsChosenDiv").css('visibility','hidden');
         $("div#activeAirportsDiv").show();
       }
     });
@@ -563,7 +561,7 @@
     <!--For choosen country airports on the right of the page (3.Column)-->
     <div class="column">
 
-      <div class="box orange" id="airportsChosenDiv" style="visibility: hidden;">
+      <div class="box orange" id="airportsChosenDiv">
         <span class="title">Airports List</span>
         <!--<input type="search" id="searchNames" >-->
         <form method="post">
