@@ -240,12 +240,13 @@ form > .textbox {
 
 
 
+
 /*Css properties for Inactive airports*/
 
 #inactiveAirportsList li{
   display:none;
 }
-
+/*For scroll view for lazy load Chosen airports*/
 #inactiveAirportsList::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -265,9 +266,9 @@ form > .textbox {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #555;
 }
-/*End of the scroll view for lazy load*/
+/*End of the scroll view for lazy load for Inactive airports*/
 
-
+/*Show More & Show Less for Inactive airports*/
 #loadMoreInactive {
   position: absolute;
   top: 815px;
@@ -315,6 +316,93 @@ form > .textbox {
   background-color: #fff;
   color: #ee5f4a;
 }
+/*End of Show More & Show Less for Inactive airports*/
+/*Css properties end for Inactive airports*/
+
+
+
+
+
+/*Css properties for Chosen airports*/
+
+#airportsChosenList li{
+  display:none;
+}
+
+
+/*For scroll view for lazy load Chosen airports*/
+#airportsChosenList::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#airportsChosenList::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#airportsChosenList::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+/*End of the scroll view for lazy load Chosen airports*/
+
+/*Show More & Show Less for Chosen airports*/
+#loadMoreAirportsChosen {
+  position: absolute;
+  top: 815px;
+  left: 47px;
+  width: 190px;
+  padding: 10px;
+  text-align: center;
+  /*background-color: #33739E; blue one*/
+  background-color: #8EBD40;
+  color: #fff;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #fff;
+  box-shadow: 0 1px 1px #ccc;
+  transition: all 600ms ease-in-out !important;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out !important;
+  border-radius: 1.5em;
+}
+#loadMoreAirportsChosen:hover {
+  background-color: #fff;
+  color: #8EBD40;
+}
+#showLessAirportsChosen {
+  position: absolute;
+  top: 818px;
+  left: 276px;
+  width: 215px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ee5f4a;
+  color: #fff;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #fff;
+  box-shadow: 0 1px 1px #ccc;
+  transition: all 600ms ease-in-out !important;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out !important;
+  border-radius: 1.5em;
+}
+#showLessAirportsChosen:hover {
+  background-color: #fff;
+  color: #ee5f4a;
+}
+/*End of Show More & Show Less for Chosen airports*/
+/*Css properties end for Chosen airports*/
+
 
 
 /*Checkbox css*/

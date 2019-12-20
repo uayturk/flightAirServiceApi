@@ -363,6 +363,25 @@
     });
   </script>
 
+  <!--For lazy load chosen airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      size_li_chosen = $("#airportsChosenDiv li").size();
+      z = 2;
+      $('#inactiveAirportsList li:lt(' + z + ')').show();
+      //$('#inactiveAirportsList li:lt('+y+')', this).show();
+      $('#loadMoreAirportsChosen').click(function () {
+        console.log("choooseeeeeennnn load moooorrreeee ");
+        z = (z + 2 <= size_li_chosen) ? z + 2 : size_li_chosen;
+        $('#inactiveAirportsList li:lt(' + z + ')').show(200);
+      });
+      $('#showLessAirportsChosen').click(function () {
+        z = (z - 2 < 0) ? 3 : z - 2;
+        $('#airportsChosenDiv li').not(':lt(' + z + ')').hide(200);
+      });
+    });
+  </script>
 
   <!--For filtering active airports-->
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
@@ -410,6 +429,27 @@
     });
   </script>
 
+  <!--For filtering chosen airports-->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#airportsChosenDivSearchNames").on('change keyup keydown paste cut', function () {
+        var val = $(this).val();
+        $("ul li").each(function () {
+          var $this = $(this)
+          if ($this.html().indexOf(val) == -1) {
+            $this.fadeOut(300, function () {
+              this.closest('li');
+            }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+          } else {
+            $this.fadeIn(300, function () {
+              this.closest('li');
+            });
+          }
+        });
+      });
+    });
+  </script>
 
   <!--
     {{#summaryChosen}}
@@ -436,9 +476,11 @@
     $(document).on('change', "input[name='subscribe']", function () {
       if ($(this).is(':checked')) {
         $("div#inActiveAirportsDiv").css("visibility", "visible");
+        $("div#airportsChosenDiv").css("visibility", "visible");
         $("div#activeAirportsDiv").hide();
       } else {
         $("div#inActiveAirportsDiv").css('visibility','hidden');
+        $("div#airportsChosenDiv").css('visibility','hidden');
         $("div#activeAirportsDiv").show();
       }
     });
@@ -521,7 +563,7 @@
     <!--For choosen country airports on the right of the page (3.Column)-->
     <div class="column">
 
-      <div class="box orange" id="airportsChosenDiv" style="visibility: hidden">
+      <div class="box orange" id="airportsChosenDiv" style="visibility: hidden;">
         <span class="title">Airports List</span>
         <!--<input type="search" id="searchNames" >-->
         <form method="post">
