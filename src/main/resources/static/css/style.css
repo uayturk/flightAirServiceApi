@@ -355,8 +355,8 @@ form > .textbox {
 /*Show More & Show Less for Chosen airports*/
 #loadMoreAirportsChosen {
   position: absolute;
-  top: 815px;
-  left: 47px;
+  top: 892px;
+  left: 1285px;
   width: 190px;
   padding: 10px;
   text-align: center;
@@ -379,8 +379,8 @@ form > .textbox {
 }
 #showLessAirportsChosen {
   position: absolute;
-  top: 818px;
-  left: 276px;
+  top: 892px;
+  left: 1522px;
   width: 215px;
   padding: 10px;
   text-align: center;

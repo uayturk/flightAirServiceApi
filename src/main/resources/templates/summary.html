@@ -369,16 +369,16 @@
     $(document).ready(function () {
       size_li_chosen = $("#airportsChosenDiv li").size();
       z = 2;
-      $('#inactiveAirportsList li:lt(' + z + ')').show();
+      $('#airportsChosenList li:lt(' + z + ')').show();
       //$('#inactiveAirportsList li:lt('+y+')', this).show();
       $('#loadMoreAirportsChosen').click(function () {
-        console.log("choooseeeeeennnn load moooorrreeee ");
+        console.log("choooseeeeeennnn load moooorrreeee ",size_li_chosen,$('#airportsChosenList li:lt(' + z + ')'));
         z = (z + 2 <= size_li_chosen) ? z + 2 : size_li_chosen;
-        $('#inactiveAirportsList li:lt(' + z + ')').show(200);
+        $('#airportsChosenList li:lt(' + z + ')').show(200);
       });
       $('#showLessAirportsChosen').click(function () {
         z = (z - 2 < 0) ? 3 : z - 2;
-        $('#airportsChosenDiv li').not(':lt(' + z + ')').hide(200);
+        $('#airportsChosenList li').not(':lt(' + z + ')').hide(200);
       });
     });
   </script>
@@ -603,7 +603,7 @@
 
 
 </ul>
-<p style="position: absolute;top: 900px;left: 1600px;">developed by
+<p style="position: absolute;top: 918px;left: 1596px;;">developed by
   <mark class="yellow"><i>Ufuk Atakan Yüksel</i></mark>
 </p>
 </body>
