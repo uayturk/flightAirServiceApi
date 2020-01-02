@@ -122,15 +122,17 @@ mark.yellow{
   margin-right: 25px;
 }
 
-.orange { color: #F5876E; }
+.orange { color: red; }
 
 .blue{ color: #61A8DC; }
 
-.green{ color: #8EBD40; }
+.green{ color: lime; }
 
 .purple { color: #988CC3; }
 
 .gold { color: #D8C86E; }
+
+.snow { color: snow; }
 
 #activeAirportsList li{
   display:none;
@@ -185,7 +187,7 @@ mark.yellow{
 }
 #showLess {
   position: absolute;
-  top: 818px;
+  top: 815px;
   left: 276px;
   width: 215px;
   padding: 10px;
@@ -356,7 +358,7 @@ form > .textbox {
 #loadMoreAirportsChosen {
   position: absolute;
   top: 892px;
-  left: 1285px;
+  left: 977px;
   width: 190px;
   padding: 10px;
   text-align: center;
@@ -380,7 +382,7 @@ form > .textbox {
 #showLessAirportsChosen {
   position: absolute;
   top: 892px;
-  left: 1522px;
+  left: 1214px;
   width: 215px;
   padding: 10px;
   text-align: center;
@@ -471,7 +473,7 @@ form > .textbox {
   display: table-cell;
   min-height: 150px;
   width: 33.33%;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   /*min-width: 300px;*/
   margin-bottom: 8px;
   font-size:16px;
