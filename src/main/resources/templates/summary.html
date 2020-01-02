@@ -387,11 +387,9 @@
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
-      console.log("fgdgdgdgdgddgdg");
       $("#searchNames").on('change keyup keydown paste cut', function () {
         var val = $(this).val();
-        console.log("fgdgdgdgdgddgdg 111111111111111111111111111111111111");
-        $("ul li").each(function () {
+        $("#activeAirportsList li").each(function () {
           var $this = $(this)
           if ($this.html().indexOf(val) == -1) {
             $this.fadeOut(300, function () {
@@ -413,7 +411,7 @@
     $(document).ready(function () {
       $("#searchNamesInactive").on('change keyup keydown paste cut', function () {
         var val = $(this).val();
-        $("ul li").each(function () {
+        $("#inactiveAirportsList li").each(function () {
           var $this = $(this)
           if ($this.html().indexOf(val) == -1) {
             $this.fadeOut(300, function () {
@@ -432,10 +430,12 @@
   <!--For filtering chosen airports-->
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
+
     $(document).ready(function () {
       $("#airportsChosenDivSearchNames").on('change keyup keydown paste cut', function () {
+
         var val = $(this).val();
-        $("ul li").each(function () {
+        $('#airportsChosenList li').each(function () {
           var $this = $(this)
           if ($this.html().indexOf(val) == -1) {
             $this.fadeOut(300, function () {
@@ -562,10 +562,10 @@
     <div class="column">
 
       <div class="box orange" id="airportsChosenDiv">
-        <span class="title">Airports List</span>
+        <span class="title">List of Airports by Country</span>
         <!--<input type="search" id="searchNames" >-->
         <form method="post">
-          <input type="text" class="textbox" id="airportsChosenDivSearchNames" placeholder="Search Inactive Airports">
+          <input type="text" class="textbox" id="airportsChosenDivSearchNames" placeholder="Search Country Airports">
 
         </form>
         <ul id="airportsChosenList"
