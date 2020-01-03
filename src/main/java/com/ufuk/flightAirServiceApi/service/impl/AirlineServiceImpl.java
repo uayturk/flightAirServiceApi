@@ -11,6 +11,9 @@ import com.ufuk.flightAirServiceApi.service.AirlineService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -31,7 +34,7 @@ public class AirlineServiceImpl implements AirlineService {
   //@Scheduled(fixedRate = 1000*60*720)
   public void readAirlineJsonFromUrlSaveMongoDb() throws IOException, JSONException {
 
-    /*String url = "https://api.flightstats.com/flex/airlines/rest/v1/json/all?appId=6354af1a&appKey=+131acf5588626fec70d69a7b5ea59583&details=true&ormat=json";
+    /*String url = "https://api.flightstats.com/flex/airlines/rest/v1/json/all?appId=953b56fd&appKey=+28e78200c467d447d92faf3595affc41&details=true&ormat=json";
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 

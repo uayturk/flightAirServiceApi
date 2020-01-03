@@ -122,7 +122,7 @@ mark.yellow{
   margin-right: 25px;
 }
 
-.orange { color: red; }
+.orange { color: #ff0000; }
 
 .blue{ color: #61A8DC; }
 
@@ -131,6 +131,7 @@ mark.yellow{
 .purple { color: #988CC3; }
 
 .gold { color: #D8C86E; }
+
 
 .snow { color: snow; }
 

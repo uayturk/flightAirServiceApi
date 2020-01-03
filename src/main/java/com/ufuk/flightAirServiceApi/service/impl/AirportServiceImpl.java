@@ -13,8 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,7 @@ public class AirportServiceImpl implements AirportService {
   //@Scheduled(fixedRate = 1000*60*720)
   public void readJsonFromUrlSaveMongoDb() throws IOException, JSONException {
 
-    /*String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=6354af1a&appKey=+131acf5588626fec70d69a7b5ea59583&details=true&ormat=json";
+    String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=953b56fd&appKey=+28e78200c467d447d92faf3595affc41&details=true&ormat=json";
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -56,10 +58,10 @@ public class AirportServiceImpl implements AirportService {
     System.out.println("Response Code : " + responseCode);
     System.out.println("Response Message : " + responseMessage);
     BufferedReader in = new BufferedReader(
-        new InputStreamReader(con.getInputStream()));*/
+        new InputStreamReader(con.getInputStream()));
 
-    FileReader fr = new FileReader("/home/ufuk/Masaüstü/test2");
-    BufferedReader in = new BufferedReader(fr);
+  /*  FileReader fr = new FileReader("/home/ufuk/Masaüstü/test2");
+    BufferedReader in = new BufferedReader(fr);*/
 
     String inputLine;
     StringBuffer response = new StringBuffer();
@@ -93,9 +95,33 @@ public class AirportServiceImpl implements AirportService {
     Gson gson = new Gson();
     Airports baseObjects = gson.fromJson(response.toString(), Airports.class);  //Converting JSON to Java Object. From response.toString() (JSON) to Airport.class(JAVA OBJECT)
 
+   /* int counter = 0;
+    int counter2 = 0;
     for (BaseObject o : baseObjects.getBaseObjects()) {
       String jsonObject = gson.toJson(o); //Converting our Object type to JSON type.
       BaseObject baseObject = gson.fromJson(jsonObject, BaseObject.class);//Converting our JSON type to baseobject type.In here,our datas are filled in Baseobject fields.From jsonObject(JSON) to BaseObject.class(BaseObject type)
+
+
+        boolean control = false;
+        for (Field declaredField : baseObject.getClass().getDeclaredFields()) {
+          if(declaredField.getName().equalsIgnoreCase("faa")){
+            counter++;
+            control = true;
+          }
+        }
+        if(control){
+          if(baseObject.getFaa() == null){
+            log.info("GGGGGGGGGGGGGGGGGGGGGGGGGGHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJ: {}", baseObject.getFaa());
+            baseObject.setFaa("");
+          }
+        }else{
+          counter2++;
+          log.info("FAAAAAAAAAAAAAA YOOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKK MKKKKK");
+        }
+
+
+
+
                                                                            //This code's shortly explain is: It is save baseobject to database true format.
       log.info("trying to save airport object: {}", baseObject);
       mongoTemplate.save(baseObject, AirportCollection.OBJECTS.toString());
@@ -104,6 +130,9 @@ public class AirportServiceImpl implements AirportService {
       System.out.println(baseObject);
 
     }
+
+    log.info("WWWWWEEEEEEEEEEWERRRRRRRRRRRRRRRRREWRRRRRRRRRRRRRRRRRRRRRRRr: {}", counter);
+    log.info("WWWWWEEEEEEEEEEWERRRRRRRRRRRRRRRRREWRRRRRRRRRRRRRRRRRRRRRRRr2222222222222222222222222222: {}", counter2);*/
   }
 
 
@@ -229,6 +258,29 @@ public class AirportServiceImpl implements AirportService {
 
     log.info("query to fetch airports for given country objects: {}", query);
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
+    log.info("sizeeeeee: {}", result.size());
+    log.info("faa lı size: {}",  Arrays.stream(result.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa")));
+
+    for(BaseObject resultBegin : result){
+//     // for (Field declaredField : resultBegin.getClass().getDeclaredFields()) {
+//      resultBegin.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa"));
+//    //  }
+
+      if(resultBegin.getFaa() == null){
+        log.info("RESULT FAA NULL FOUND: {}", resultBegin.getFaa());
+        resultBegin.setFaa("");
+      }
+
+      if(resultBegin.getFaa().equals("")){
+        log.info("RESULT FAA EMPTY TEXT FOUND: {}", resultBegin.getFaa());
+      }
+
+      if(!resultBegin.getFaa().equals("") || resultBegin.getFaa() != null){
+        log.info("RESULT NORMAL FAA TEXT FOUND: {}", resultBegin.getFaa());
+      }
+
+
+    }
     log.info("successfully fetched result size: {}", result.size());
     log.info("FINALLY RESULT AIRPORTS BY GIVEN COUNTRY NAME: {}", result);
     return result;
