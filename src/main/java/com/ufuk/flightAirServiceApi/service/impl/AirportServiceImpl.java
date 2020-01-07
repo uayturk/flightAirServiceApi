@@ -48,7 +48,7 @@ public class AirportServiceImpl implements AirportService {
   //@Scheduled(fixedRate = 1000*60*720)
   public void readJsonFromUrlSaveMongoDb() throws IOException, JSONException {
 
-/*    String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=953b56fd&appKey=+28e78200c467d447d92faf3595affc41&details=true&ormat=json";
+    String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=953b56fd&appKey=+28e78200c467d447d92faf3595affc41&details=true&ormat=json";
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -58,10 +58,10 @@ public class AirportServiceImpl implements AirportService {
     System.out.println("Response Code : " + responseCode);
     System.out.println("Response Message : " + responseMessage);
     BufferedReader in = new BufferedReader(
-        new InputStreamReader(con.getInputStream()));*/
+        new InputStreamReader(con.getInputStream()));
 
-    FileReader fr = new FileReader("/home/ufuk/Masaüstü/test2FaaSız");
-    BufferedReader in = new BufferedReader(fr);
+   /* FileReader fr = new FileReader("/home/ufuk/Masaüstü/test2FaaSız");
+    BufferedReader in = new BufferedReader(fr);*/
 
     String inputLine;
     StringBuffer response = new StringBuffer();
@@ -76,7 +76,7 @@ public class AirportServiceImpl implements AirportService {
      * {
      *   "airports": [
      *     {
-     *       "fs": "00M",
+     *       "fs": "00M", --->(key value pairs = property)
      *       .
      *       .
      *       .
@@ -102,32 +102,40 @@ public class AirportServiceImpl implements AirportService {
       BaseObject baseObject = gson.fromJson(jsonObject,
           BaseObject.class);//Converting our JSON type to baseobject type.In here,our datas are filled in Baseobject fields.From jsonObject(JSON) to BaseObject.class(BaseObject type)
 
-      boolean control = false;
+
+      /**
+       *  Sometimes JSON data might have missing properties. For handle this issue, we can use Field class of java.See below codes for how to use.
+       *  Eğer gelen JSON değerindeherhangi bir eksik property varsa burada onu setleyerek olmayanı atamış oluyoruz. Javanın Field classını kullanabiliriz.
+       **/
+
       for (Field declaredField : baseObject.getClass().getDeclaredFields()) {
 
-        if (declaredField.getName().equalsIgnoreCase("faa") || declaredField.getName().equalsIgnoreCase("icao")) {
-          log.info("FAA YOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKK: {}",declaredField.getName().equalsIgnoreCase("faa"));
-          counter++;
-          control = true;
-        }
        if (!declaredField.getName().equalsIgnoreCase("faa")){
-          log.info("FAAwwwwwwwww: {}",declaredField.getName().equalsIgnoreCase("faa"));
-          counter2++;
           baseObject.setFaa("");
         }
         if (!declaredField.getName().equalsIgnoreCase("icao")){
-          log.info("OOOOOOOOOOOOOOOOOOOO: {}",declaredField.getName().equalsIgnoreCase("icao"));
-          counter2++;
           baseObject.setIcao("");
         }
+        if (!declaredField.getName().equalsIgnoreCase("iata")){
+          baseObject.setIata("");
+        }
+        if (!declaredField.getName().equalsIgnoreCase("stateCode")){
+          baseObject.setStateCode("");
+        }
+        if (!declaredField.getName().equalsIgnoreCase("weatherZone")){
+          baseObject.setWeatherZone("");
+        }
+        /** End of the handle of missing property of JSON**/
 
-      if (control) {
-        if (baseObject.getFaa() == null || baseObject.getIcao() == null) {
-          //log.info("GGGGGGGGGGGGGGGGGGGGGGGGGGHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJ: {}", baseObject.getFaa());
+        //We are checking here if our data have any null value. Handle for nullPointer.
+        if (baseObject.getFaa() == null || baseObject.getIcao() == null || baseObject.getIata() == null || baseObject.getStateCode() == null || baseObject.getWeatherZone() == null) {
           baseObject.setFaa("");
           baseObject.setIcao("");
+          baseObject.setIata("");
+          baseObject.setStateCode("");
+          baseObject.setWeatherZone("");
         }
-      }
+
 
     }
 
@@ -270,7 +278,7 @@ public class AirportServiceImpl implements AirportService {
     log.info("sizeeeeee: {}", result.size());
     log.info("faa lı size: {}",  Arrays.stream(result.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa")));
 
-    for(BaseObject resultBegin : result){
+/*    for(BaseObject resultBegin : result){
 //     // for (Field declaredField : resultBegin.getClass().getDeclaredFields()) {
 //      resultBegin.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa"));
 //    //  }
@@ -289,7 +297,7 @@ public class AirportServiceImpl implements AirportService {
       }
 
 
-    }
+    }*/
     log.info("successfully fetched result size: {}", result.size());
     log.info("FINALLY RESULT AIRPORTS BY GIVEN COUNTRY NAME: {}", result);
     return result;
