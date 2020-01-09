@@ -5,6 +5,8 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.google.gson.Gson;
 import com.ufuk.flightAirServiceApi.beans.AirportCollection;
+import com.ufuk.flightAirServiceApi.beans.Search.SearchRequest;
+import com.ufuk.flightAirServiceApi.beans.Search.SearchResponse;
 import com.ufuk.flightAirServiceApi.model.airportModel.Airports;
 import com.ufuk.flightAirServiceApi.model.airportModel.BaseObject;
 import com.ufuk.flightAirServiceApi.service.AirportService;
@@ -21,10 +23,18 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 @Slf4j
@@ -95,8 +105,6 @@ public class AirportServiceImpl implements AirportService {
     Gson gson = new Gson();
     Airports baseObjects = gson.fromJson(response.toString(), Airports.class);  //Converting JSON to Java Object. From response.toString() (JSON) to Airport.class(JAVA OBJECT)
 
-    int counter = 0;
-    int counter2 = 0;
     for (BaseObject o : baseObjects.getBaseObjects()) {
       String jsonObject = gson.toJson(o); //Converting our Object type to JSON type.
       BaseObject baseObject = gson.fromJson(jsonObject,
@@ -148,8 +156,6 @@ public class AirportServiceImpl implements AirportService {
 
     }
 
-    log.info("WWWWWEEEEEEEEEEWERRRRRRRRRRRRRRRRREWRRRRRRRRRRRRRRRRRRRRRRRr: {}", counter);
-    log.info("WWWWWEEEEEEEEEEWERRRRRRRRRRRRRRRRREWRRRRRRRRRRRRRRRRRRRRRRRr2222222222222222222222222222: {}", counter2);
   }
 
 
@@ -321,6 +327,37 @@ public class AirportServiceImpl implements AirportService {
     return result;
   }
 
+  @Override
+  public List<BaseObject> searchObjects(String searchCriteria) {
+    log.info("trying to search base tree object with search request: {}", searchCriteria);
 
+    TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
+        .onField("name")
+        .onField("city")
+        .onField("countryName")
+        .onField("regionName")
+        .build();
+
+    mongoTemplate.indexOps(BaseObject.class).ensureIndex(textIndex);
+
+    Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matchingPhrase(searchCriteria));
+    //log.info("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR:{}",query);
+
+    List<BaseObject> result = mongoTemplate.find(query, BaseObject.class ,AirportCollection.OBJECTS.toString());
+    long total = mongoTemplate.count(query, BaseObject.class, AirportCollection.OBJECTS.toString());
+
+    //findParents(result, searchRequest.getShowCountry(), searchRequest.getShowParent());
+
+    log.info("successfully fetched result setNames, count: {}, total: {}", result.size(), total);
+
+    return result;
+  }
+
+  /**
+   * https://stackoverflow.com/questions/36163606/text-search-not-working-with-spring-boot-mongodb
+   * https://stackoverflow.com/questions/44739732/spring-data-mongodb-full-text-search
+   * https://stackoverflow.com/questions/54066573/how-to-create-full-text-search-query-in-mongodb-with-spring-data
+   * https://stackoverflow.com/questions/33127967/create-indexes-for-search-using-mongotemplate
+   * */
 
 }

@@ -1,5 +1,7 @@
 package com.ufuk.flightAirServiceApi.service;
 
+import com.ufuk.flightAirServiceApi.beans.Search.SearchRequest;
+import com.ufuk.flightAirServiceApi.beans.Search.SearchResponse;
 import com.ufuk.flightAirServiceApi.model.airportModel.BaseObject;
 import java.io.IOException;
 import java.util.List;
@@ -25,5 +27,10 @@ public interface AirportService {
 
   List<BaseObject> getActiveOrInactiveAirportsByCountryName(Boolean active,String country);
 
+  /**
+   * @param searchCriteria search request parameters.
+   * @return returns specified page of airport result.
+   */
+  List<BaseObject> searchObjects(String searchCriteria);
 
 }

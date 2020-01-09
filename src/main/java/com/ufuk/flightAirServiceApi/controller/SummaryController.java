@@ -38,8 +38,6 @@ public class SummaryController {
     return "redirect:/airportApi";
   }
 
-
-
   @RequestMapping(value = "/airportApi", method = RequestMethod.GET)
   public String summary(ModelMap modelMap) throws IOException {
 

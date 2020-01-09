@@ -436,6 +436,7 @@
 
         var val = $(this).val();
         $('#airportsChosenList li').each(function () {
+          console.log("Val değeri : ",val);
           var $this = $(this)
           if ($this.html().indexOf(val) == -1) {
             $this.fadeOut(300, function () {

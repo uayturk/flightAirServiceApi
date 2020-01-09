@@ -1,5 +1,7 @@
 package com.ufuk.flightAirServiceApi.controller;
 
+import com.ufuk.flightAirServiceApi.beans.Search.SearchRequest;
+import com.ufuk.flightAirServiceApi.beans.Search.SearchResponse;
 import com.ufuk.flightAirServiceApi.model.airportModel.BaseObject;
 import com.ufuk.flightAirServiceApi.service.AirportService;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +27,8 @@ public class AirportFunctionalityController {
   }
 
   /**
-   * Check {@link AirportService}.
+   * See {@link AirportService#readJsonFromUrlSaveMongoDb()}.
+   *
    */
   @RequestMapping(value = "/readJsonFromUrlSaveMongoDb", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
@@ -36,6 +40,8 @@ public class AirportFunctionalityController {
   }
 
   /**
+   * See {@link AirportService#getActiveOrInactiveAirports(Boolean)}
+   *
    * @param active true/false valid active status.
    * @return returns active or inactive datas which is read from DB.
    */
@@ -49,6 +55,7 @@ public class AirportFunctionalityController {
   }
 
   /**
+   * See {@link AirportService#getAirportsByCode(String)}
    *
    * @param code valid fs code for airports.
    * @return valid airports for given fs codes.
@@ -64,6 +71,7 @@ public class AirportFunctionalityController {
 
 
   /**
+   * See {@link AirportService#getAirportsByCityCode(String)}
    *
    * @param cityCode valid city code for cities.
    * @return airports for given city code.
@@ -78,6 +86,7 @@ public class AirportFunctionalityController {
   }
 
   /**
+   * See {@link AirportService#getAirportsByIataCode(String)}
    *
    * @param iataCode valid iata code for airports.
    * @return airports for given iata.
@@ -92,6 +101,7 @@ public class AirportFunctionalityController {
   }
 
   /**
+   * See {@link AirportService#getAirportsByIcaoCode(String)}
    *
    * @param icaoCode valid icao code.
    * @return airports for given icao codes.
@@ -106,6 +116,7 @@ public class AirportFunctionalityController {
   }
 
   /**
+   * See {@link AirportService#getAirportsByCity(String)}
    *
    * @param city valid city names.
    * @return airports for given city name.
@@ -120,6 +131,7 @@ public class AirportFunctionalityController {
   }
 
   /**
+   *See {@link AirportService#getAirportsByCountryName(String)}
    *
    * @param country valid country name.
    * @return airports for given country name.
@@ -142,6 +154,20 @@ public class AirportFunctionalityController {
   )
   public List<BaseObject> getActiveOrInactiveAirportsByCountryName(@RequestParam(required = true) Boolean active,@RequestParam(required = true) String country) {
     return airportService.getActiveOrInactiveAirportsByCountryName(active,country);
+  }
+
+  /**
+   * See {@link AirportService#searchObjects(String)}.
+   *
+   * @param searchCriteria includes all search params.
+   * @return returns specified page of airports result
+   */
+  @RequestMapping(value = "/searchAirports", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for searchObjects",
+      notes = "searchObjects returns searched text from mongoDB.")
+  public List<BaseObject> searchObjects(@RequestParam("criteria") String searchCriteria) {
+    return airportService.searchObjects(searchCriteria);
   }
 
 }
