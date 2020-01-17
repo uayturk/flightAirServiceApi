@@ -342,11 +342,4 @@ public class AirportServiceImpl implements AirportService {
     return result;
   }
 
-  /**
-   * https://stackoverflow.com/questions/36163606/text-search-not-working-with-spring-boot-mongodb
-   * https://stackoverflow.com/questions/44739732/spring-data-mongodb-full-text-search
-   * https://stackoverflow.com/questions/54066573/how-to-create-full-text-search-query-in-mongodb-with-spring-data
-   * https://stackoverflow.com/questions/33127967/create-indexes-for-search-using-mongotemplate
-   * */
-
 }
