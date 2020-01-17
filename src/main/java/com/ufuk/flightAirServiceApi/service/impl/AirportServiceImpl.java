@@ -23,6 +23,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -164,6 +165,13 @@ public class AirportServiceImpl implements AirportService {
    * @param active valid boolean value. (true or false)
    * @return active or inactive airports.
    */
+  /**
+   @Cacheable annotation is one of the most important and common annotation for caching the requests. If developers annotate a method with @Cacheable annotation and
+   multiple requests are received by the application,then this annotation will not execute the method multiple times, instead, it will send the result from the cached storage
+   @Cacheable anatasyonu performans açısından harikadır. Bu anatasyon metodu bir kere execute ettikten sonra ikinci kere çalışacağında metodu tekrar execute yerine
+   cache'e kaydettiği veriyi direk olarak döndürür böylece zamanı oldukca kısaltır.
+   */
+  @Cacheable("getActiveOrInactiveAirports")
   public List<BaseObject> getActiveOrInactiveAirports(Boolean active) {
     log.info("trying to load active/inactive airports.");
     Query query;
@@ -177,7 +185,7 @@ public class AirportServiceImpl implements AirportService {
 
     List<BaseObject> result = mongoTemplate.find(query,BaseObject.class,AirportCollection.OBJECTS.toString());
     log.info("successfully fetched result size: {}", result.size());
-    log.info("FINALLY RESULT: {}", result);
+    //log.info("FINALLY RESULT: {}", result);
 
     return result;
   }
@@ -188,6 +196,7 @@ public class AirportServiceImpl implements AirportService {
    * @param code valid fs (FlightStats code) for airport.
    * @return airports for given fs code.
    */
+  @Cacheable("getAirportsByCode")
   public List<BaseObject> getAirportsByCode(String code){
     log.info("trying to get airports for given fs code {}.",code);
     Query query = new Query(where("fs").is(code));
@@ -204,6 +213,7 @@ public class AirportServiceImpl implements AirportService {
    * @param cityCode valid city code for airpots.
    * @return airports for given city code.
    */
+  @Cacheable("getAirportsByCityCode")
   public List<BaseObject> getAirportsByCityCode(String cityCode){
     log.info("trying to get airports for given city code {}.",cityCode);
 
@@ -222,6 +232,7 @@ public class AirportServiceImpl implements AirportService {
    * @param iataCode valid iata code.
    * @return airports for given iata.
    */
+  @Cacheable("getAirportsByIataCode")
   public List<BaseObject> getAirportsByIataCode(String iataCode){
     log.info("trying to get airports for given iata code {}.",iataCode);
 
@@ -239,6 +250,7 @@ public class AirportServiceImpl implements AirportService {
    * @param icaoCode valid icao code.
    * @return airports for given icao codes.
    */
+  @Cacheable("getAirportsByIcaoCode")
   public List<BaseObject> getAirportsByIcaoCode(String icaoCode){
     log.info("trying to get airports for given icao code {}.",icaoCode);
 
@@ -257,6 +269,7 @@ public class AirportServiceImpl implements AirportService {
    * @param city valid city name.
    * @return airports for given city name.
    */
+  @Cacheable("getAirportsByCity")
   public List<BaseObject> getAirportsByCity(String city){
     log.info("trying to get airports for given city {}.",city);
 
@@ -274,6 +287,7 @@ public class AirportServiceImpl implements AirportService {
    * @param country valid country name.
    * @return airports for given country name.
    */
+  @Cacheable("getAirportsByCountryName")
   public List<BaseObject> getAirportsByCountryName(String country){
     log.info("trying to get airports for given city {}.",country);
 
@@ -284,31 +298,12 @@ public class AirportServiceImpl implements AirportService {
     log.info("sizeeeeee: {}", result.size());
     log.info("faa lı size: {}",  Arrays.stream(result.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa")));
 
-/*    for(BaseObject resultBegin : result){
-//     // for (Field declaredField : resultBegin.getClass().getDeclaredFields()) {
-//      resultBegin.getClass().getDeclaredFields()).filter( p -> p.getName().equalsIgnoreCase("faa"));
-//    //  }
-
-      if(resultBegin.getFaa() == null){
-        log.info("RESULT FAA NULL FOUND: {}", resultBegin.getFaa());
-        resultBegin.setFaa("");
-      }
-
-      if(resultBegin.getFaa().equals("")){
-        log.info("RESULT FAA EMPTY TEXT FOUND: {}", resultBegin.getFaa());
-      }
-
-      if(!resultBegin.getFaa().equals("") || resultBegin.getFaa() != null){
-        log.info("RESULT NORMAL FAA TEXT FOUND: {}", resultBegin.getFaa());
-      }
-
-
-    }*/
     log.info("successfully fetched result size: {}", result.size());
     log.info("FINALLY RESULT AIRPORTS BY GIVEN COUNTRY NAME: {}", result);
     return result;
   }
 
+  @Cacheable("getActiveOrInactiveAirportsByCountryName")
   public List<BaseObject> getActiveOrInactiveAirportsByCountryName(Boolean active,String country){
     log.info("trying to get active/inactive airports according to specific country.");
     Query query;
@@ -341,7 +336,6 @@ public class AirportServiceImpl implements AirportService {
     mongoTemplate.indexOps(BaseObject.class).ensureIndex(textIndex);
 
     Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matchingPhrase(searchCriteria));
-    //log.info("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR:{}",query);
 
     List<BaseObject> result = mongoTemplate.find(query, BaseObject.class ,AirportCollection.OBJECTS.toString());
     long total = mongoTemplate.count(query, BaseObject.class, AirportCollection.OBJECTS.toString());

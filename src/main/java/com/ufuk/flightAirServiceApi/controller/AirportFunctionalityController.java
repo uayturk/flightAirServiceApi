@@ -10,13 +10,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+/**
+ * @CrossOrigin For security reasons, browsers prohibit AJAX calls to resources residing outside the current origin. For example,
+ * as you’re checking your bank account in one tab,you could have the evil.com website in another tab.
+ * The scripts from evil.com shouldn’t be able to make AJAX requests to your bank API (withdrawing money from your account!) using your credentials.
+ *
+ * @CrossOrigin sadece belirli kaynaklardan gelen requestlere cevap verilmesini sağlar. Fakat metotları GET yapmak gereklidir. POST'ta hata alındı fakat desteklemekte.
+ * Global şekilde aşağıya da vererek kullanılır. Fakat biz bunu diable edip configden okuyarak aldık bir başka yöntem olarak.
+ */
 @Controller
+//@CrossOrigin(origins = "http://localhost:8086", methods = RequestMethod.GET)
 public class AirportFunctionalityController {
 
   @Autowired
@@ -30,6 +41,7 @@ public class AirportFunctionalityController {
    * See {@link AirportService#readJsonFromUrlSaveMongoDb()}.
    *
    */
+
   @RequestMapping(value = "/readJsonFromUrlSaveMongoDb", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for readJsonFromUrlSaveMongoDb.\n",
@@ -45,7 +57,7 @@ public class AirportFunctionalityController {
    * @param active true/false valid active status.
    * @return returns active or inactive datas which is read from DB.
    */
-  @RequestMapping(value = "/getActiveOrInactiveAirports", method = {RequestMethod.POST}, produces = "application/json")
+  @RequestMapping(value = "/getActiveOrInactiveAirports", method = {RequestMethod.GET}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for getActiveOrInactiveAirports.\n",
       notes = "getActiveOrInactiveAirports is loads Active or Inactive airports values from MongoDb.\n "
