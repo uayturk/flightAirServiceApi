@@ -178,7 +178,7 @@ public class AirportFunctionalityController {
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for searchObjects",
       notes = "searchObjects returns searched text from mongoDB.")
-  public List<BaseObject> searchObjects(@RequestParam("criteria") String searchCriteria) {
+  public List<BaseObject> searchObjects(@RequestParam(required = true) String searchCriteria) {
     return airportService.searchObjects(searchCriteria);
   }
 

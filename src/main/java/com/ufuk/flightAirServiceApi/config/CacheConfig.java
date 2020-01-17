@@ -25,7 +25,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 			 */
 			@Override
 			protected Cache createConcurrentMapCache(final String name) {
-				return new ConcurrentMapCache(name, CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.SECONDS)
+				return new ConcurrentMapCache(name, CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES)
 						.maximumSize(10000).build().asMap(), false);
 			}
 		};

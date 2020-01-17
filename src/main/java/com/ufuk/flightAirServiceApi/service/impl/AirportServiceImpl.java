@@ -326,21 +326,16 @@ public class AirportServiceImpl implements AirportService {
   public List<BaseObject> searchObjects(String searchCriteria) {
     log.info("trying to search base tree object with search request: {}", searchCriteria);
 
-    TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
-        .onField("name")
-        .onField("city")
+    // This is manual version of indexing. @TextIndexed is do the same job with  below code.
+   /* TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
         .onField("countryName")
-        .onField("regionName")
         .build();
-
-    mongoTemplate.indexOps(BaseObject.class).ensureIndex(textIndex);
+    mongoTemplate.indexOps(BaseObject.class).ensureIndex(textIndex);*/
 
     Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matchingPhrase(searchCriteria));
 
     List<BaseObject> result = mongoTemplate.find(query, BaseObject.class ,AirportCollection.OBJECTS.toString());
     long total = mongoTemplate.count(query, BaseObject.class, AirportCollection.OBJECTS.toString());
-
-    //findParents(result, searchRequest.getShowCountry(), searchRequest.getShowParent());
 
     log.info("successfully fetched result setNames, count: {}, total: {}", result.size(), total);
 
