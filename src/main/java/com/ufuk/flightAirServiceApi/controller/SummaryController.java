@@ -34,7 +34,7 @@ public class SummaryController {
   /*@ResponseBody*/  //if you not use this annotation,you get " javax.servlet.ServletException: Circular view path [...] "
   private String getAirportsForCountry(String selectedCountryName) {
     List<List<BaseObject>> airports = new ArrayList<>();
-    System.out.println("fffffffffffffffffff:" + selectedCountryName);
+    System.out.println("fffffffffffffffffff:" + selectedCountryName.replaceAll("\"", "").trim());
     chosenCountryName.setChosenCountryName(selectedCountryName.replaceAll("\"", "").trim());
 
     airports.add(airportService.getAirportsByCountryName(selectedCountryName.replaceAll("\"", "").trim()));
@@ -46,12 +46,11 @@ public class SummaryController {
   @RequestMapping(value = "/getSearchedResults", method = RequestMethod.POST)
   private String getAirportsForSearchedText(String searchText) {
     List<List<BaseObject>> airports = new ArrayList<>();
-    System.out.println("DDDDDDDDDDDDDDDD:" + searchText);
 
-    searchedText.setSearchedText("Turk");
+    searchedText.setSearchedText(searchText.replaceAll("\"", "").trim());
+    System.out.println("GGGGGGGGGGGGgGGGG:" + searchedText.getSearchedText());
 
-
-    airports.add(airportService.searchObjects(searchText.replaceAll("\"", "").trim()));
+    airports.add(airportService.searchObjects(searchedText.getSearchedText()));
 
     return "redirect:/airportApi";
   }
@@ -60,6 +59,9 @@ public class SummaryController {
   public String summary(ModelMap modelMap) throws IOException {
 
     modelMap.addAttribute("summaryActive", airportService.getActiveOrInactiveAirports(true));
+    if((searchedText.getSearchedText()!=null)){
+      modelMap.addAttribute("summaryActive", airportService.searchObjects(searchedText.getSearchedText()));
+    }
     //modelMap.addAttribute("summaryActive", airportService.searchObjects(searchedText.getSearchedText()));
     modelMap.addAttribute("summaryInactive", airportService.getActiveOrInactiveAirports(false));
     modelMap.addAttribute("summaryChosen", airportService.getAirportsByCountryName(chosenCountryName.getChosenCountryName()));

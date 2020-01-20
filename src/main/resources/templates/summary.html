@@ -312,7 +312,6 @@
               setTimeout(function () {
                 window.location.reload();
               });
-
             }
           });
         })
@@ -390,33 +389,36 @@
       $("#searchNames").on('change keyup keydown paste cut', function () {
         var val = $(this).val();
 
-        var enteredText = {
-          enteredText: val
+        var searchText = {
+          searchText: val
         };
-        console.log("dddddddddddddd",enteredText);
-        console.log("ddddddddddd",val);
-        $.ajax({
-          type: "POST",
-          url: 'getSearchedResults',
-          data: enteredText,
-          success: function (result) {
-            var $this = $(this)
-            if ($this.html().indexOf(val) == -1) {
-              $this.fadeOut(300, function () {
-                this.closest('li');
-              }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
-            } else {
-              $this.fadeIn(300, function () {
-                this.closest('li');
+
+        setTimeout(function () {
+          $.ajax({
+            type: "POST",
+            url: 'getSearchedResults',
+            data: searchText,
+            success: function (result) {
+              /*    var $this = $(this)
+                  if ($this.html().indexOf(val) == -1) {
+                    $this.fadeOut(300, function () {
+                      this.closest('li');
+                    }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+                  } else {
+                    $this.fadeIn(300, function () {
+                      this.closest('li');
+                    });
+                  }*/
+              console.log("Successfuly sent data to the Spring Controller.");
+              setTimeout(function () {
+                window.location.reload();
               });
             }
-            console.log("Successfuly sent data to the Spring Controller.");
-            setTimeout(function () {
-              window.location.reload();
-            });
+          });
+        },5000);
 
-          }
-        });
+
+
 
         /*$("#activeAirportsList li").each(function () {
           var $this = $(this)

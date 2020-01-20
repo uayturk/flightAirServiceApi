@@ -171,15 +171,15 @@ public class AirportFunctionalityController {
   /**
    * See {@link AirportService#searchObjects(String)}.
    *
-   * @param searchCriteria includes all search params.
+   * @param searchText includes all search params.
    * @return returns specified page of airports result
    */
   @RequestMapping(value = "/searchAirports", method = {RequestMethod.POST}, produces = "application/json")
   @ResponseBody
   @ApiOperation(value = "Necessary doc is the below for searchObjects",
       notes = "searchObjects returns searched text from mongoDB.")
-  public List<BaseObject> searchObjects(@RequestParam(required = true) String searchCriteria) {
-    return airportService.searchObjects(searchCriteria);
+  public List<BaseObject> searchObjects(@RequestParam(required = true) String searchText) {
+    return airportService.searchObjects(searchText);
   }
 
 }

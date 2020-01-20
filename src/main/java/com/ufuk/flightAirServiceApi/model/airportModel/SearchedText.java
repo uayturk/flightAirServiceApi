@@ -1,6 +1,5 @@
 package com.ufuk.flightAirServiceApi.model.airportModel;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

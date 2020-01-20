@@ -326,7 +326,7 @@ public class AirportServiceImpl implements AirportService {
   public List<BaseObject> searchObjects(String searchCriteria) {
     log.info("trying to search base tree object with search request: {}", searchCriteria);
 
-    // This is manual version of indexing. @TextIndexed is do the same job with  below code.
+    // This is manual version of indexing. @TextIndexed is do the same job with below code.
    /* TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
         .onField("countryName")
         .build();
