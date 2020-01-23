@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
 
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
+
   <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <link href="css/flag-icon.css" rel="stylesheet" type="text/css">
@@ -386,38 +389,64 @@
   <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
   <script>
     $(document).ready(function () {
-      $("#searchNames").on('change keyup keydown paste cut', function () {
+
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
+
+      $("#searchNames").on('change keyup keydown paste cut', function (e) {
         var val = $(this).val();
 
         var searchText = {
           searchText: val
         };
 
-        setTimeout(function () {
+        if(13 === e.which) {
           $.ajax({
             type: "POST",
+            async: false,
             url: 'getSearchedResults',
             data: searchText,
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader(header, token);
+            },
             success: function (result) {
-              /*    var $this = $(this)
-                  if ($this.html().indexOf(val) == -1) {
-                    $this.fadeOut(300, function () {
-                      this.closest('li');
-                    }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
-                  } else {
-                    $this.fadeIn(300, function () {
-                      this.closest('li');
-                    });
-                  }*/
               console.log("Successfuly sent data to the Spring Controller.");
               setTimeout(function () {
                 window.location.reload();
               });
+
+              /* $.each( result,function(key, card) {
+                console.log("sssvsvsdvvsvsd",key)
+                $("#activeAirportsListLi").html().fadeOut(300);
+                $("#activeAirportsListLi").html(result).fadeIn(300);
+              });
+
+              var counter = 0;
+              console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",$("#activeAirportsList").html());
+              //console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",$("#activeAirportsList").html(result));
+
+             $("#activeAirportsList li").each(function () {
+                counter++;
+              });
+              $.each($("#activeAirportsList li").html(result), function(index, value){
+
+                $("#activeAirportsListLi").html().fadeOut(100, function () {
+                  this.closest('li');
+                });
+                $("#activeAirportsListLi").html(result).fadeIn(100, function () {
+                  this.closest('li');
+                });
+                $("#activeAirportsListLi").html(result).fadeIn(100);
+                counter++;
+              });
+
+              console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",counter);*/
+
             }
           });
-        },5000);
-
-
+        }
+       // https://stackoverflow.com/questions/27182081/spring-security-csrf-token-not-working-with-ajax-call-form-submit-in-same-jsp
+       // https://stackoverflow.com/questions/45542218/how-to-display-values-without-page-loading-with-spring-and-ajax
 
 
         /*$("#activeAirportsList li").each(function () {
@@ -533,7 +562,7 @@
         <ul id="activeAirportsList"
             style="color: #666;list-style:square;padding: 0;margin-left: 20px;font-size: 12px;overflow-y: auto; overflow-x:hidden; width: 450px;height: 650px;padding: 20px;">
           {{#summaryActive}}
-          <li style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:300px; width: 395px">
+          <li id="activeAirportsListLi" style=" list-style: none; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height:300px; width: 395px">
             <div style="display: table">
               <div style="display: table-cell; float: left;width: 600px;">
                 <h2><label>Airport Name: </label>{{name}}</h2>

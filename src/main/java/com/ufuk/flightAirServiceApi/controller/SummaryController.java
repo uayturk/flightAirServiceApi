@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,7 @@ public class SummaryController {
   public String summary(ModelMap modelMap) throws IOException {
 
     modelMap.addAttribute("summaryActive", airportService.getActiveOrInactiveAirports(true));
+
     if((searchedText.getSearchedText()!=null)){
       modelMap.addAttribute("summaryActive", airportService.searchObjects(searchedText.getSearchedText()));
     }
