@@ -495,19 +495,22 @@
       $("#airportsChosenDivSearchNames").on('change keyup keydown paste cut', function () {
 
         var val = $(this).val();
-        $('#airportsChosenList li').each(function () {
-          console.log("Val değeri : ",val);
-          var $this = $(this)
-          if ($this.html().indexOf(val) == -1) {
-            $this.fadeOut(300, function () {
-              this.closest('li');
-            }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
-          } else {
-            $this.fadeIn(300, function () {
-              this.closest('li');
-            });
-          }
-        });
+        if(val.length>3){
+          $('#airportsChosenList li').each(function () {
+            console.log("Val değeri : ",val);
+            var $this = $(this)
+            if ($this.html().indexOf(val) == -1) {
+              $this.fadeOut(300, function () {
+                this.closest('li');
+              }); //fadeOut() is removing other elements except chosen one. We can get parent tag with "closest('li')". And we remove others with remove() .
+            } else {
+              $this.fadeIn(300, function () {
+                this.closest('li');
+              });
+            }
+          });
+        }
+
       });
     });
   </script>
