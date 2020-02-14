@@ -25,7 +25,7 @@ If you wanna change default configuration,parameters set in src/main/resources/a
 ***What You'll See In My Project***
 
 <br/>App is using datas from https://developer.flightstats.com/api-docs/flightstatus/v2 . This api returns pure airports/airlines informations.
-What you can do with this api:
+What you can do with my FlightAirServiceApi:
 
 * Get active/inactive airports/airlines.
 
