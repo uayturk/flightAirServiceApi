@@ -50,3 +50,5 @@ What you can do with my FlightAirServiceApi:
 * Spring Boot - CORS Support : Cross-Origin Resource Sharing (CORS) is a security concept that allows restricting the resources implemented in web browsers. It prevents the JavaScript code producing or consuming the requests against different origin 
 
 * Spring Boot - @cacheable :  Caching is a mechanism to enhance the performance of a system. It is a temporary memory that lies between the application and the persistent database. Cache memory stores recently used data items in order to reduce the number of database hits as much as possible.
+
+* Search : Also you will find how to search items on backendside. @TextIndexed annotation used. Check searchObjects method.
