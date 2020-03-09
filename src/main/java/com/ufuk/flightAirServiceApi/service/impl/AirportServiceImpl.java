@@ -5,8 +5,6 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.google.gson.Gson;
 import com.ufuk.flightAirServiceApi.beans.AirportCollection;
-import com.ufuk.flightAirServiceApi.beans.Search.SearchRequest;
-import com.ufuk.flightAirServiceApi.beans.Search.SearchResponse;
 import com.ufuk.flightAirServiceApi.model.airportModel.Airports;
 import com.ufuk.flightAirServiceApi.model.airportModel.BaseObject;
 import com.ufuk.flightAirServiceApi.service.AirportService;
@@ -24,18 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
+
 
 @Service
 @Slf4j
@@ -59,7 +51,7 @@ public class AirportServiceImpl implements AirportService {
   //@Scheduled(fixedRate = 1000*60*720)
   public void readJsonFromUrlSaveMongoDb() throws IOException, JSONException {
 
-    String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=953b56fd&appKey=+28e78200c467d447d92faf3595affc41&details=true&ormat=json";
+    String url = "https://api.flightstats.com/flex/airports/rest/v1/json/all?appId=23b2edff&appKey=+a2e5b33a6694d371ab1ba13c242c13e1&details=true&ormat=json";
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
