@@ -106,7 +106,7 @@ public class AirportServiceImpl implements AirportService {
 
       /**
        *  Sometimes JSON data might have missing properties. For handle this issue, we can use Field class of java.See below codes for how to use.
-       *  Eğer gelen JSON değerindeherhangi bir eksik property varsa burada onu setleyerek olmayanı atamış oluyoruz. Javanın Field classını kullanabiliriz.
+       *  Eğer gelen JSON değerindeherhangi bir eksik property varsa burada onu setleyerek olmayanı atamış oluyoruz. Javanın Field classını kullanabiliriz.( Reflection (Yansıma) )
        **/
 
       for (Field declaredField : baseObject.getClass().getDeclaredFields()) {
