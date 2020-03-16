@@ -47,10 +47,10 @@ What you can do with my FlightAirServiceApi:
 
 ***Useful Features That Have Been Used***
 
-* Spring Boot - CORS Support : Cross-Origin Resource Sharing (CORS) is a security concept that allows restricting the resources implemented in web browsers. It prevents the JavaScript code producing or consuming the requests against different origin 
+* ***Spring Boot - CORS Support*** : Cross-Origin Resource Sharing (CORS) is a security concept that allows restricting the resources implemented in web browsers. It prevents the JavaScript code producing or consuming the requests against different origin 
 
-* Spring Boot - @cacheable :  Caching is a mechanism to enhance the performance of a system. It is a temporary memory that lies between the application and the persistent database. Cache memory stores recently used data items in order to reduce the number of database hits as much as possible.
+* ***Spring Boot - @cacheable*** :  Caching is a mechanism to enhance the performance of a system. It is a temporary memory that lies between the application and the persistent database. Cache memory stores recently used data items in order to reduce the number of database hits as much as possible.
 
-* Search : Also you will find how to search items on backendside. @TextIndexed annotation used. Check searchObjects method.
+* ***Search*** : Also you will find how to search items on backendside. ***@TextIndexed*** annotation used. Check searchObjects method.
 
-* Reflection : You can find Reflection property of Java.You can handle with missing or null equal fields.In this Api,I used " Field declaredField ". I means that returns an array of Field objects reflecting all the fields declared by the class or interface represented by this Class object. This includes public, protected, default (package) access, and private fields, but excludes inherited fields.
+* ***Reflection*** : You can find Reflection property of Java.You can handle with missing or null equal fields.In this Api,I used " Field declaredField ". I means that returns an array of Field objects reflecting all the fields declared by the class or interface represented by this Class object. This includes public, protected, default (package) access, and private fields, but excludes inherited fields.
