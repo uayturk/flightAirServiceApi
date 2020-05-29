@@ -16,7 +16,7 @@ If you wanna change default configuration,parameters set in src/main/resources/a
 
 ***Swagger UI***
 
-<br/>By default this assesment will be executed on 8080 port and you'll see the entire endpoints from http://localhost:8080/swagger-ui.html
+<br/>By default this assesment will be executed on 8080 port and you'll see the entire endpoints from http://localhost:8080/flightAirService/swagger-ui.html
 
 ***IDE***
 
