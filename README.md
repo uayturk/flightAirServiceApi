@@ -1,7 +1,7 @@
 
 ***ASSESMENT***
 
-<br/>FlightAirServiceApi is the RESTful service Api with embedded apache tomcat as servlet container. Used Spring Boot as framework, MongoDB used as database.
+<br/>FlightAirServiceApi is the RESTful service Api with embedded apache tomcat as servlet container. It use Java / Spring Boot as Back-End, Jquery, Jsp as Front-End, MongoDB as Database and I designed this project to use and show some of nice Spring Boot features technically which is like CORS Support(uses for Security), Cacheable, TextIndexed(uses for Searching) and Reflection. Application is implemented using Intellij IDEA Environment. FlightAirServiceApi is use Flightstats which is an api that returns information of airports and airlines around the world as JSON. FlightAirService sends request for getting JSON data to the Flightstats Api. It gets all values and save to the MongoDB.
 
 ***RUN***
 
