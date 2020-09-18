@@ -53,4 +53,4 @@ What you can do with my FlightAirServiceApi:
 
 * ***Search*** : Also you will find how to search items on backendside. ***@TextIndexed*** annotation used. Check searchObjects method.
 
-* ***Reflection*** : You can find Reflection property of Java.You can handle with missing or null equal fields.In this Api,I used " Field declaredField ". I means that returns an array of Field objects reflecting all the fields declared by the class or interface represented by this Class object. This includes public, protected, default (package) access, and private fields, but excludes inherited fields.
+* ***Reflection*** : You can find Reflection property of Java.You can handle with missing or null equal fields.In this Api,I used " Field declaredField ". It means that returns an array of Field objects reflecting all the fields declared by the class or interface represented by this Class object. This includes public, protected, default (package) access, and private fields, but excludes inherited fields.
